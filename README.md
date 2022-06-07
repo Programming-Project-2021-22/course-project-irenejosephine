@@ -1,4 +1,4 @@
-# Your project's title
+# My Wardrobe - Organize your wardrobe
 
 ## 1. About
 
