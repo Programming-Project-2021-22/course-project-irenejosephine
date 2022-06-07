@@ -12,9 +12,8 @@ Add a link to a demo of your project.
 
 This project was created by:
 
-* Student 1 
-* Student 2
-* Student 3
+* Avezzù Irene 20142 
+* Sacchetto Josephine 
 
 ## 3. Usage
 
@@ -64,25 +63,23 @@ Describe your overall experience in developing this project.
 
 Describe the roles and responsibilities each member had in this project.
 
-- **Student 1:** I was responsible for implementing components `x` and `y`. I also helped 2 to implement technique `z`.
-- **Student 2:** ...
-- **Student 3:** ...
+- **Irene Avezzù:** I was responsible for implementing components `x` and `y`. I also helped 2 to implement technique `z`.
+- **Josephine Sacchetto:** ...
+
 
 ### 5.3. Main Challenges
 
 Elaborate on the main challenges each group member faced throughout the project and how they were surpassed.
 
-- **Student 1:** The most difficult aspect in this project for me was to implement the units tests. The reason was X so I had to do Y and I achived Z.
-- **Student 2:** ...
-- **Student 3:** ...
+- **Irene Avezzù:** The most difficult aspect in this project for me was to implement the units tests. The reason was X so I had to do Y and I achived Z.
+- **Josephine Sacchetto:** ...
 
 ### 5.4. Learning Outcomes
 
 Describe what you learned with this project.
 
-- **Student 1:** I learned a new library called `xyz`!
-- **Student 2:** I learned how to implement the design pattern `abc`
-- **Student 3:** ...
+- **Irene Avezzù** I learned a new library called `xyz`!
+- **Josephine Sacchetto:** I learned how to implement the design pattern `abc`
 
 
 
