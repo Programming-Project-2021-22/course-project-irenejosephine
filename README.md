@@ -55,10 +55,12 @@ List and explain how you used the 10 programming techniques required for this pr
 4.   **Try/catch:** try and catch are necessary when working with I/O file
 5.   **Abstract classes:** abstract classes were used in the realization of the Item class wich represent a general item but no item that is not a top/bottom/accesorize can be created
 6.   **Generic method:** generic method were used to create an effective change method, so only one method was necessary. The T element can be of some specific type based on the instant data that the user wants to change
-7.   **Overriding:** ?? to string di item
+7.   **Overriding:** the tostring of the class Item has been overrided
 8.   **Overloading:** we used multiple constructor for the Item obj based on which parameters were passed
-9.   **Varargs:** in AppPannel (per caricare gli oggetti)??
-10.  **Generic classes:** ??
+9.   **Serialization:**
+10.   **Deserialization:**
+11.   **Varargs:** in AppPannel (per caricare gli oggetti)??
+12.  **Generic classes:** ??
 
 ### 4.4. Tests
 
@@ -69,15 +71,15 @@ Briefly describe and motivate your test suite.
 ### 5.1. Overall Experience
 
 The idea for this project came to us pretty easly but the realization did not come as easy. We wanted to creat something that could be actual useful. We intially struggled with the impossibility of using a database. The choice between a web app and a desktop us took us some times but at the end we choose a desktop app because it would be easier to upload picture of items for the users.
-We did not manage the time given in the best way but by the end we were able to make it work.
+Even if we had never collaborated to a project we divided in an optimal way the implementations needed of the app. On the other hand we did not manage the time given in the best way but by the end we were able to complete the assigned task.
 
 ### 5.2. Division of Responsibilities
 
-Describe the roles and responsibilities each member had in this project. 
+Description of the roles and responsibilities that each member had in this project:
 
-- **Irene Avezzù:** I was mainly responsible for the implementation of the backend section of the app
-- **Josephine Sacchetto:** I was mainly responsible for the implementation of the frontend section of the app
-- We worked separately in the actual realisazion of the code but the idea for both the  structure of the backend and the graphic of the frontend were discussed and realized together (50-50). Also when extra material were needed there was collaboration bothways. We also worked together for the realization of the test suits.
+- **Irene Avezzù:** I was mainly responsible for the implementation of the backend of the app
+- **Josephine Sacchetto:** I was mainly responsible for the implementation of the frontend of the app
+- We worked separately in the actual realisazion of the code but the idea for both the structure of the backend and the graphic of the frontend were discussed and outlined together. We also worked together when extra materials were needed, such as images or researches on structure (e.g. object of JavaFx). We collaborated for the realization of the test suits.
 
 
 ### 5.3. Main Challenges
