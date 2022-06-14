@@ -15,7 +15,7 @@ Add a link to a demo of your project.
 This project was created by:
 
 * Avezzù Irene 20142 
-* Sacchetto Josephine 
+* Sacchetto Josephine 20464
 
 ## 3. Usage
 
@@ -39,6 +39,7 @@ mvn abc
 
 ### 4.1. Architectural Overview
 
+We divided our idea in blocks structuring our application in classes
 Describe the architecture of your application.
 
 ### 4.2. Third-Party Libraries
@@ -54,8 +55,8 @@ List and explain how you used the 10 programming techniques required for this pr
 4.   **Try/catch:** try and catch are necessary when working with I/O file
 5.   **Abstract classes:** abstract classes were used in the realization of the Item class wich represent a general item but no item that is not a top/bottom/accesorize can be created
 6.   **Generic method:** generic method were used to create an effective change method, so only one method was necessary. The T element can be of some specific type based on the instant data that the user wants to change
-7.   **Overriding:** ??
-8.   **Overloading:** ??
+7.   **Overriding:** ?? to string di item
+8.   **Overloading:** we used multiple constructor for the Item obj based on which parameters were passed
 9.   **Varargs:** in AppPannel (per caricare gli oggetti)??
 10.  **Generic classes:** ??
 
@@ -67,7 +68,7 @@ Briefly describe and motivate your test suite.
 
 ### 5.1. Overall Experience
 
-The idea for this project came to us pretty easly but the realization did not come as easy. We wanted to creat something that could be actual useful. We intially struggled with the impossibility of using a database. The choice between a web app and a desktop us took us some times but at the end we choose a desktop app becaut it would be easier to upload picture of items for the users.
+The idea for this project came to us pretty easly but the realization did not come as easy. We wanted to creat something that could be actual useful. We intially struggled with the impossibility of using a database. The choice between a web app and a desktop us took us some times but at the end we choose a desktop app because it would be easier to upload picture of items for the users.
 We did not manage the time given in the best way but by the end we were able to make it work.
 
 ### 5.2. Division of Responsibilities
