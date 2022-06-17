@@ -1,0 +1,37 @@
+[
+    {
+    "seasonOfItem": "winter",
+    "occasionOfItem": "formal",
+    "colorOfItem": "red",
+    "favourite": true,
+    "picture": "image1.png",
+    "description": "item1"
+    },
+
+    {
+        "seasonOfItem": "spring",
+        "occasionOfItem": "sporty",
+        "colorOfItem": "yellow",
+        "favourite": true,
+        "picture": "image2.png",
+        "description": "item2"
+    },
+
+    {
+        "seasonOfItem": "summer",
+        "occasionOfItem": "formal",
+        "colorOfItem": "white",
+        "favourite": false,
+        "picture": "image3.png",
+        "description": "item3"
+    },
+
+    {
+        "seasonOfItem": "winter",
+        "occasionOfItem": "formal",
+        "colorOfItem": "blue",
+        "favourite": false,
+        "picture": "image4.png",
+        "description": "item4"
+    }
+] 
