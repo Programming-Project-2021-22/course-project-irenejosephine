@@ -39,7 +39,11 @@ mvn abc
 
 ### 4.1. Architectural Overview
 
-We divided our idea in blocks structuring our application in classes
+We divided our idea in blocks structuring our application in classes.
+The Start class represents the starting point for our application, it creates and item of LoginPane which, based on the user actions, can lead to a RegisterPane (where the user can create a new account and then being rediected to the LoginPane) or the HomePane. The HomePane
+
+The backend of the app 
+
 Describe the architecture of your application.
 
 ### 4.2. Third-Party Libraries
@@ -57,10 +61,9 @@ List and explain how you used the 10 programming techniques required for this pr
 6.   **Generic method:** generic method were used to create an effective change method, so only one method was necessary. The T element can be of some specific type based on the instant data that the user wants to change
 7.   **Overriding:** the tostring of the class Item has been overrided
 8.   **Overloading:** we used multiple constructor for the Item obj based on which parameters were passed
-9.   **Serialization:**
-10.   **Deserialization:**
-11.   **Varargs:** in AppPannel (per caricare gli oggetti)??
-12.  **Generic classes:** ??
+9.   **Deserialization:** we used deserialization to allow our application to creates items objects from a json file
+10.   **Varargs:** in AppPannel (per caricare gli oggetti)??
+11.  **Generic classes:** ??
 
 ### 4.4. Tests
 
