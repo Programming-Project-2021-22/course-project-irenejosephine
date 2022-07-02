@@ -235,7 +235,7 @@
                         <!-- Usage: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>app.Start</mainClass>
+                            <mainClass>app/Start</mainClass>
                         </configuration>
                     </execution>
                 </executions>

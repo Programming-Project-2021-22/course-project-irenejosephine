@@ -22,17 +22,22 @@ import javafx.stage.Stage;
  *
  */
 public class RegisterPane extends GridPane{
-
+    //all elements that are necessary in this pane are created
     private Label username, password, email, phone, title, login ;
     private TextField inputusername, inputemail, inputphone;
     private PasswordField inputpassword;
     private Font font;
-    private Button singin, register;
+    private Button signIn, register;
     private ImageView img;
     private String set_username, set_password, set_email, set_phone;
+    private App application;
 
-    public RegisterPane(App nA){
-    	App application = nA;
+    /**
+     * Constructor of the object
+     * @param application of type App
+     */
+    public RegisterPane(App application){
+        this.application = application;
         title= new Label("Register");
         font = new Font(24);
         img = new ImageView("images/Profile.png");
@@ -46,7 +51,7 @@ public class RegisterPane extends GridPane{
         inputphone = new TextField();
         register= new Button("Register");
         login=new Label("Still have an account? ");
-        singin= new Button("Sing in");
+        signIn = new Button("Sing in");
 
         title.setFont(font);
 
@@ -62,46 +67,8 @@ public class RegisterPane extends GridPane{
         GridPane.setHalignment(phone, HPos.RIGHT);
         phone.setFont(font);
 
-        register.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent t) {
-                set_username=inputusername.getText();
-                System.out.println(set_username);
-                set_password=inputpassword.getText();
-                System.out.println(set_password);
-                set_email=inputemail.getText();
-                System.out.println(set_email);
-                set_phone=inputphone.getText();
-                System.out.println(set_phone);
-                if(set_username.isEmpty() || set_password.isEmpty() ){
-                    Alert alert = new Alert(AlertType.WARNING);
-                    alert.setTitle("Warning");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Please insert a username and a password");
-                    alert.showAndWait();
-                }else{
-                    application.createNewUser(set_username, set_password, set_email, set_phone);
-                    Stage stage = (Stage) register.getScene().getWindow();
-                    stage.close();
-                    Stage stage2 = new Stage();
-                    Scene scene = new Scene(new LoginPane(application), 800, 600);
-                    stage2.setTitle("Login");
-                    stage2.setScene(scene);
-                    stage2.show();
-                }
-            }
-        });
-
-        singin.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent t) {
-                Stage stage = (Stage) singin.getScene().getWindow();
-                stage.close();
-                Stage stage2 = new Stage();
-                        Scene scene = new Scene(new LoginPane(application), 800, 600);
-                        stage2.setTitle("Login");
-                        stage2.setScene(scene);
-                        stage2.show();
-            }
-        });
+        register.setOnAction(this::registerEvent);
+        signIn.setOnAction(this::signInEvent);
 
         setStyle("-fx-background-color: white");
         setAlignment(Pos.CENTER); //alignment of the grid in the scene
@@ -120,6 +87,50 @@ public class RegisterPane extends GridPane{
         add(inputphone, 1, 4); // column, row
         add(register,2,4);
         add(login, 0, 5); // column, row
-        add(singin, 1, 5); // column, row
+        add(signIn, 1, 5); // column, row
     }
+
+    /**
+     * Event handler for when the button register is clicked
+     * creates the new account if all the necessary info are present otherwise generates an allert
+     * @param event
+     */
+    public void registerEvent(ActionEvent event){
+        set_username=inputusername.getText();
+        set_password=inputpassword.getText();
+        set_email=inputemail.getText();
+        set_phone=inputphone.getText();
+        if(set_username.isEmpty() || set_password.isEmpty() ){
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText(null);
+            alert.setContentText("Please insert a username and a password");
+            alert.showAndWait();
+        }else {
+            application.createNewUser(set_username, set_password, set_email, set_phone);
+            Stage stage = (Stage) register.getScene().getWindow();
+            stage.close();
+            Stage stage2 = new Stage();
+            Scene scene = new Scene(new LoginPane(application), 800, 600);
+            stage2.setTitle("Login");
+            stage2.setScene(scene);
+            stage2.show();
+        }
+    }
+
+    /**
+     * Event handler for when the button signIn is clicked
+     * return to LoginPane
+     * @param event
+     */
+    public void signInEvent(ActionEvent event){
+        Stage stage = (Stage) signIn.getScene().getWindow();
+        stage.close();
+        Stage stage2 = new Stage();
+        Scene scene = new Scene(new LoginPane(application), 800, 600);
+        stage2.setTitle("Login");
+        stage2.setScene(scene);
+        stage2.show();
+    }
+
 }

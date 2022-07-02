@@ -33,19 +33,6 @@ public class Accessorize extends Item {
     }
 
     /**
-     * This is the constructor that gets six String elements as parameters and assign them to the instance data of the class
-     * The parameter "description" is not passed so this.description is set by default to an empty string
-     * @param selectedSeason
-     * @param selectedOccasion
-     * @param selectedColor
-     * @param selectedType
-     * @param filename
-     */
-    public Accessorize(String selectedSeason, String selectedOccasion, String selectedColor, String selectedType, String favourite, String filename ) {
-        this(selectedSeason, selectedOccasion, selectedColor, selectedType, favourite, filename, "");
-    }
-
-    /**
      * Constructor form file json
      * @param filename
      */

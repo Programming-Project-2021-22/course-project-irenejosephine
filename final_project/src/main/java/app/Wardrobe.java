@@ -10,7 +10,7 @@ import java.util.List;
  * @author Irene Avezzù
  *
  */
-public class Wardrobe {
+public class Wardrobe <T extends Item>{
     private ArrayList <Item> items = new ArrayList<>();
     private ArrayList <Item> favourites = new ArrayList<>();
     private ArrayList <Outfit> outfits = new ArrayList<>();
@@ -70,7 +70,7 @@ public class Wardrobe {
     }
     /**
      * Getter of picture
-     * @param picture
+     * @return picture
      */
     public String getPicture(){
         return picture;
@@ -161,7 +161,7 @@ public class Wardrobe {
      * Add a new app.Item of type T (extends app.Accessorize, app.Bottom, app.Dress, app.Top) to the ArrayList of items
      * @param <T extends Accessorize, Bottom, Dress, Top> newItem
      */
-    public <T extends Accessorize, Bottom, Dress, Top> void addItem (T newItem){
+    public void addItem (T newItem){
         items.add(newItem);
     }
 

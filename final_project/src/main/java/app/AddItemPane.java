@@ -1,14 +1,10 @@
 package app;
 
-import javafx.event.EventHandler;
+import javafx.event.Event;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -24,388 +20,533 @@ import javafx.stage.Stage;
  *
  */
 public class AddItemPane extends HBox {
-    private String inputcolor, inputseason, inputoccasion, inputfavorite, inputcategory, inputitem, inputpath, inputdescription;
+    private String inputColor, inputSeason, inputOccasion, inputFavorite, inputCategory, inputType, inputPath, inputDescription, inputFilePath;
     private int index;
     private App application;
-    private Label path, title, color, season, occasion, favorite, category, items, description;
+    private Label path, title, color, season, occasion, favorite, category, type, description, filePath;
     private Font font;
-    private TextField choosepath,choosedescription;
-    private Button done, done2, option1, option2; //option 1 and 2 bottoni per import da file o creazione item
-    private ComboBox selectcolor, selectseason, selectoccasion, selectfavorite, selectcategory, selectitem;
+    private TextField chooseImagePath, chooseDescription, chooseFilePath;
+    private Button doneOptions, doneFromFile, optionOptions, optionFromFile; //option 1 and 2 bottoni per import da file o creazione item
+    private ComboBox selectColor, selectSeason, selectOccasion, selectFavorite, selectCategory, selectType;
+    private ImageView logo;
+    private VBox imagePathVB, colorVB, seasonVB, occasionVB, favoriteVB, categoryVB, typeVB, descriptionVB, showOptions, showFromFile, button, filePathVB;
+    private HBox head, row1, row2, row3, row4, row5, favouriteHB, head2, row6, row7;
+    private RadioButton yes, no;
+    private ToggleGroup tg;
 
     //set costant ComboBox
     public void addColorCategory() {
-    	selectcolor.getItems().add("White");
-        selectcolor.getItems().add("Black");
-        selectcolor.getItems().add("Pink");
-        selectcolor.getItems().add("Blue");
-        selectcolor.getItems().add("Red");
-        selectcolor.getItems().add("Yellow");
-        selectcolor.getItems().add("Green");
-        selectcolor.getItems().add("Beige");
-        selectcolor.getItems().add("Brown");
-        selectcolor.getItems().add("Orange");
+    	selectColor.getItems().add("White");
+        selectColor.getItems().add("Black");
+        selectColor.getItems().add("Pink");
+        selectColor.getItems().add("Blue");
+        selectColor.getItems().add("Red");
+        selectColor.getItems().add("Yellow");
+        selectColor.getItems().add("Green");
+        selectColor.getItems().add("Beige");
+        selectColor.getItems().add("Brown");
+        selectColor.getItems().add("Orange");
     }
     public void addSeasonCategory() {
-    	selectseason.getItems().add("Winter");
-    	selectseason.getItems().add("Spring");
-    	selectseason.getItems().add("Summer");
-    	selectseason.getItems().add("Fall");
+    	selectSeason.getItems().add("Winter");
+    	selectSeason.getItems().add("Spring");
+    	selectSeason.getItems().add("Summer");
+    	selectSeason.getItems().add("Fall");
     }
     public void addOccasionCategory() {
-    	selectoccasion.getItems().add("Formal");
-        selectoccasion.getItems().add("EveryDay");
-        selectoccasion.getItems().add("Semiformal");
-        selectoccasion.getItems().add("Sporty");
+    	selectOccasion.getItems().add("Formal");
+        selectOccasion.getItems().add("EveryDay");
+        selectOccasion.getItems().add("Semiformal");
+        selectOccasion.getItems().add("Sporty");
     }
-    public void addFavouriteCategory() {
-    	selectfavorite.getItems().add("Yes");
-        selectfavorite.getItems().add("No");
-    }
+    /*public void addFavouriteCategory() {
+    	selectFavorite.getItems().add("Yes");
+        selectFavorite.getItems().add("No");
+    }*/
     public void addTypeCategory() {
-    	selectcategory.getItems().add("Tops");
-        selectcategory.getItems().add("Bottoms");
-        selectcategory.getItems().add("Dresses");
-        selectcategory.getItems().add("Accessories");
+    	selectCategory.getItems().add("Tops");
+        selectCategory.getItems().add("Bottoms");
+        selectCategory.getItems().add("Dresses");
+        selectCategory.getItems().add("Accessories");
     }
 
     //set non costant ComboBox
     public void addTopCategory() {
-    	selectitem.getItems().clear();
-    	selectitem.getItems().add("TShirt");
-        selectitem.getItems().add("Sweater");
-        selectitem.getItems().add("SweatshirtAndHoodie");
-        selectitem.getItems().add("TopAndBody");
-        selectitem.getItems().add("JacketAndCoat");
-        selectitem.getItems().add("TankTop");
+    	selectType.getItems().clear();
+    	selectType.getItems().add("TShirt");
+        selectType.getItems().add("Sweater");
+        selectType.getItems().add("SweatshirtAndHoodie");
+        selectType.getItems().add("TopAndBody");
+        selectType.getItems().add("JacketAndCoat");
+        selectType.getItems().add("TankTop");
     }
     public void addBottomCategory() {
-    	selectitem.getItems().clear();
-    	selectitem.getItems().add("Skirt");
-        selectitem.getItems().add("Jeans");
-        selectitem.getItems().add("Trouser");
-        selectitem.getItems().add("Shorts");
+    	selectType.getItems().clear();
+    	selectType.getItems().add("Skirt");
+        selectType.getItems().add("Jeans");
+        selectType.getItems().add("Trouser");
+        selectType.getItems().add("Shorts");
     }
     public void addDressCategory() {
-    	selectitem.getItems().clear();
-        selectitem.getItems().add("Longs");
-        selectitem.getItems().add("Shorts");
+    	selectType.getItems().clear();
+        selectType.getItems().add("Longs");
+        selectType.getItems().add("Shorts");
     }
     public void addAccessorizeCategory() {
-    	selectitem.getItems().clear();
-    	selectitem.getItems().add("Jewelry");
-        selectitem.getItems().add("Hat");
-        selectitem.getItems().add("Belt");
-        selectitem.getItems().add("Glasses");
-        selectitem.getItems().add("Scarf");
-        selectitem.getItems().add("Gloves");
-        selectitem.getItems().add("Purse");
-        selectitem.getItems().add("Shoes");
-        selectitem.getItems().add("ForTheHair");
+    	selectType.getItems().clear();
+    	selectType.getItems().add("Jewelry");
+        selectType.getItems().add("Hat");
+        selectType.getItems().add("Belt");
+        selectType.getItems().add("Glasses");
+        selectType.getItems().add("Scarf");
+        selectType.getItems().add("Gloves");
+        selectType.getItems().add("Purse");
+        selectType.getItems().add("Shoes");
+        selectType.getItems().add("ForTheHair");
     }
 
-    public AddItemPane(App ap, int i){
-    	application = ap;
-    	index = i;
+    public AddItemPane(App application, int index){
+    	this.application = application;
+    	this.index = index;
 
-        path = new Label("Insert the path of the app.Item photo");
+        path = new Label("Insert the path of the item's photo");
         title = new Label("Add your items");
         font = new Font(24);
-        choosepath = new TextField();
-        done = new Button("Done");
+        title.setFont(font);
+        chooseImagePath = new TextField();
+        doneOptions = new Button("Done");
         color = new Label("Color:");
         description = new Label("Add description: ");
-        choosedescription = new TextField();
-        selectcolor  = new ComboBox();
+        chooseDescription = new TextField();
+        selectColor = new ComboBox();
         season = new Label("Season:");
-        selectseason  = new ComboBox();
+        selectSeason = new ComboBox();
         occasion = new Label("Occasion:");
-        selectoccasion  = new ComboBox();
+        selectOccasion = new ComboBox();
         favorite = new Label("Favorite:");
-        selectfavorite  = new ComboBox();
+        //selectFavorite = new ComboBox();
         category = new Label("Category:");
-        selectcategory  = new ComboBox();
-        items = new Label();
-        selectitem  = new ComboBox();
-        option1 = new Button("Frome file");
-        option2 = new Button("From scratch");
-        done2 = new Button("Done");
-
-
-        title.setFont(font);
+        selectCategory = new ComboBox();
+        /*selectCategory.getItems().add("Tops");
+        selectCategory.getItems().add("Bottoms");
+        selectCategory.getItems().add("Dresses");
+        selectCategory.getItems().add("Accessories");
+        selectCategory.setVisible(true);*/
+        type = new Label();
+        selectType = new ComboBox();
+        optionOptions = new Button("Frome scratch");
+        optionFromFile = new Button("From file");
+        doneFromFile = new Button("Done");
+        filePath = new Label("Insert name of JSON file:");
+        chooseFilePath = new TextField();
+        yes = new RadioButton("Yes");
+        yes.setSelected(false);
+        no = new RadioButton("No");
+        no.setSelected(true);
+        tg = new ToggleGroup();
+        yes.setToggleGroup(tg);
+        no.setToggleGroup(tg);
 
         addColorCategory();
         addSeasonCategory();
         addOccasionCategory();
-        addFavouriteCategory();
         addTypeCategory();
+        //addFavouriteCategory();
 
-        selectcategory.setOnAction((event) -> {
-            inputcategory= (String) selectcategory.getValue();
-            if(inputcategory=="Tops"){
-            	items.setText("Choose witch type of "+inputcategory +":");
-            	addTopCategory();
-            }
-            else if(inputcategory=="Bottoms"){
-            	items.setText("Choose witch type of "+inputcategory +":");
-            	addBottomCategory();
-            }
-            else if(inputcategory=="Dresses"){
-            	items.setText("Choose witch type of "+inputcategory +":");
-            	addDressCategory();
-            }
-            else if(inputcategory=="Accessories"){
-            	items.setText("Choose witch type of "+inputcategory +":");
-            	addAccessorizeCategory();
-            }
-        });
+        //event handlers
+        selectCategory.setOnAction(this::categoryEvent);
+        doneOptions.setOnAction(this::doneOptionsEvent);
+        doneFromFile.setOnAction(this::doneFromFileEvent);
 
-        done.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent t) {
-                inputcolor=(String) selectcolor.getValue();
-                inputseason=(String) selectseason.getValue();
-                inputoccasion=(String) selectoccasion.getValue();
-                inputfavorite=(String) selectfavorite.getValue();
-                inputitem=(String) selectitem.getValue();
-                inputcategory=(String) selectcategory.getValue();
-                inputdescription = (String) choosedescription.getText();
-                if (choosepath.getText().isEmpty()) {
-                    switch(inputitem){
-                        case "Top":{
-                            switch (inputcategory){
-                                case "TShirt":{
-                                    inputpath = "images/tshirt.png";
-                                    break;
-                                }
-                                case "Sweater":{
-                                    inputpath = "images/sweater.png";
-                                    break;
-                                }
-                                case "SweatshirtAndHoodie":{
-                                    inputpath = "images/sweatshirtAndHoodie.png";
-                                    break;
-                                }
-                                case "TopAndBody" :{
-                                    inputpath = "images/topAndBody.png";
-                                    break;
-                                }
-                                case "JacketAndCoat":{
-                                    inputpath = "images/jacketAndCoat.png";
-                                    break;
-                                }
-                                case "TankTop":{
-                                    inputpath = "images/tankTop.png";
-                                    break;
-                                }
-                            }
-                            break;
-                        }
-                        case "Bottom":{
-                            switch (inputcategory){
-                                case "Skirt":{
-                                    inputpath = "images/skirt.png";
-                                    break;
-                                }
-                                case "Jeans":{
-                                    inputpath = "images/jeans.png";
-                                    break;
-                                }
-                                case "Trouser":{
-                                    inputpath = "images/trouser.png";
-                                    break;
-                                }
-                                case "Shorts" :{
-                                    inputpath = "images/shorts.png";
-                                    break;
-                                }
-                            }
-                            break;
-                        }
-                        case "Dress":{
-                            switch (inputcategory){
-                                case "Longs":{
-                                    inputpath = "images/longD.jpg";
-                                    break;
-                                }
-                                case "Shorts":{
-                                    inputpath = "images/shortD.jpg";
-                                    break;
-                                }
-                            }
-                            break;
-                        }
-                        case "Accessories":{
-                            switch (inputcategory){
-                                case "Jewelry":{
-                                    inputpath = "images/jewelry.jpg";
-                                    break;
-                                }
-                                case "Hat":{
-                                    inputpath = "images/hat.jpg";
-                                    break;
-                                }
-                                case "Belt":{
-                                    inputpath = "images/belt.jpg"; ;
-                                    break;
-                                }
-                                case "Glasses" :{
-                                    inputpath = "images/glasses.jpg";
-                                    break;
-                                }
-                                case "Scarf":{
-                                    inputpath = "images/scarf.jpg";
-                                    break;
-                                }
-                                case "Gloves":{
-                                    inputpath = "images/gloves.jpg";
-                                    break;
-                                }
-                                case "Purse":{
-                                    inputpath = "images/purse.jpg";
-                                    break;
-                                }
-                                case "Shoes" :{
-                                    inputpath = "images/shoes.jpg";
-                                    break;
-                                }
-                                case "ForTheHair" :{
-                                    inputpath = "images/forTheHair.jpg";
-                                    break;
-                                }
-                            }
-                            break;
-                        }
-                    }
-                }
-                else {
-                	inputpath = "images/" + choosepath.getText();
-                }
-
-
-                if(inputcolor==null || inputseason==null || inputoccasion==null || inputfavorite==null || inputcategory==null || inputitem==null){
-                    Alert alert = new Alert(AlertType.WARNING);
-                    alert.setTitle("Warning");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Please choose from every combobox a field!");
-                    alert.showAndWait();
-                } else{
-                    if (inputdescription==null){
-                        inputdescription="";
-                    }
-                	if(inputcategory=="Tops"){
-                    	Top nT = new Top(inputseason, inputoccasion, inputcolor, inputcategory, inputitem, inputpath );
-                    }
-                    else if(inputcategory=="Bottoms"){
-                        Bottom nT = new Bottom(inputseason, inputoccasion, inputcolor, inputcategory, inputitem, inputpath );
-                    }
-                    else if(inputcategory=="Dresses"){
-                        Dress nT = new Dress(inputseason, inputoccasion, inputcolor, inputcategory, inputitem, inputpath );
-                    }
-                    else if(inputcategory=="Accessories"){
-                        Accessorize nT = new Accessorize(inputseason, inputoccasion, inputcolor, inputcategory, inputitem, inputpath );
-                    }
-	                Stage stage = (Stage) done.getScene().getWindow();
-	                stage.close();
-	                Stage stage2 = new Stage();
-	                        Scene scene = new Scene(new HomePane(application, index), 800, 600);
-	                        stage2.setTitle("Home");
-	                        stage2.setScene(scene);
-	                        stage2.show();
-                }
-            }
-        });
-
-        ImageView logo = new ImageView("images/Logo.png");
+        logo = new ImageView("images/Logo.png");
         logo.setPickOnBounds(true); // allows click on transparent areas
-        logo.setOnMouseClicked((MouseEvent e) -> {
-                Stage stage = (Stage) logo.getScene().getWindow();
-                stage.close();
-                Stage stage2 = new Stage();
-                Scene scene = new Scene(new HomePane(application, index), 800, 600);
-                stage2.setTitle("app.Seasons");
-                stage2.setScene(scene);
-                stage2.show();
-            });
+        logo.setOnMouseClicked(this::logoEvent);
 
-        VBox choice1 = new VBox(path, choosepath);
-        VBox choice2 = new VBox(color, selectcolor);
-        VBox choice3 = new VBox(season, selectseason);
-        VBox choice4 = new VBox(occasion, selectoccasion);
-        VBox choice5 = new VBox(favorite, selectfavorite);
-        VBox choice6 = new VBox(category, selectcategory);
-        VBox choice7= new VBox(items, selectitem);
-        VBox choice8 = new VBox(description,choosedescription);
+        //VBox for pane fromOptions
+        imagePathVB = new VBox(path, chooseImagePath);
+        colorVB = new VBox(color, selectColor);
+        seasonVB = new VBox(season, selectSeason);
+        occasionVB = new VBox(occasion, selectOccasion);
+        favouriteHB = new HBox (yes, no);
+        favouriteHB.setSpacing(10);
+        favoriteVB = new VBox(favorite, favouriteHB);
+        //favoriteVB = new VBox(favorite, selectFavorite);
+        categoryVB = new VBox(category, selectCategory);
+        typeVB = new VBox(type, selectType);
+        descriptionVB = new VBox(description, chooseDescription);
 
-        HBox head = new HBox(logo,title);
+        //HBox for pane fromOptions
+        head = new HBox(logo,title);
         head.setAlignment(Pos.CENTER);
         head.setSpacing(30);
 
-        HBox row1 = new HBox(option1, option2);
+        //button to choose between from options or from file
+        row1 = new HBox(optionOptions, optionFromFile);
         row1.setSpacing(30);
         row1.setAlignment(Pos.CENTER);
-
-        HBox row2 = new HBox(choice2, choice3, choice4, choice5);
+        //selectors and labels for color, season, occasion and favourite
+        row2 = new HBox(colorVB, seasonVB, occasionVB, favoriteVB);
         row2.setSpacing(30);
         row2.setAlignment(Pos.CENTER);
-
-        HBox row3= new HBox(choice6, choice7, choice1,choice8);
+        //selectors and labels for category(Top, Bottom, ...), type of Item (Tshirt, long dress, jeans,...), image path and description
+        row3 = new HBox(categoryVB, typeVB, imagePathVB, descriptionVB);
         row3.setSpacing(30);
         row3.setAlignment(Pos.CENTER);
-
-        HBox row4 = new HBox(done);
+        //button to create the item from options
+        row4 = new HBox(doneOptions);
         row4.setAlignment(Pos.CENTER);
 
+        //VBox and HBox for pane fromFile
+        //selectors and labels for fileName
+        filePathVB = new VBox(filePath, chooseFilePath);
 
-        VBox show = new VBox(head, row1 ,row2, row3, row4);
-        show.setSpacing(60);
-        show.setAlignment(Pos.CENTER);
+        row5= new HBox(categoryVB, filePathVB);
+        row5.setSpacing(30);
+        row5.setAlignment(Pos.CENTER);
 
-        VBox button = new VBox (done2);
+        showOptions = new VBox(head, row1 ,row2, row3, row4);
+        showOptions.setSpacing(30);
+        showOptions.setAlignment(Pos.CENTER);
+
+        /*
+        //HBox for pane fromFile
+        head2 = new HBox(logo,title);
+        head2.setAlignment(Pos.CENTER);
+        head2.setSpacing(30);
+        head2.setVisible(true);
+
+        //button to choose between from options or from file
+        row6 = new HBox(optionOptions, optionFromFile);
+        row6.setSpacing(30);
+        row6.setAlignment(Pos.CENTER);
+
+        row7= new HBox(categoryVB, filePathVB);
+        row7.setSpacing(30);
+        row7.setAlignment(Pos.CENTER);
+
+        button = new VBox (doneFromFile);
         button.setSpacing(30);
         button.setAlignment(Pos.BOTTOM_CENTER);
 
-        // VBox show2 = new VBox (head,row1,row3,button);
-        //     show2.setSpacing(60);
-        //     show2.setAlignment(Pos.CENTER);
+        showFromFile = new VBox (head2, row6, row7, button);
+        showFromFile.setSpacing(60);
+        showFromFile.setAlignment(Pos.CENTER);*/
 
+        optionOptions.setOnAction(this::optionOptionsEvent);
+        optionFromFile.setOnAction(this::optionFromFileEvent);
 
-        option1.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent t) {
-
-                show.getChildren().clear();
-                path.setText("Insert name of JSON file:");
-
-                VBox show2 = new VBox (head,row1,row3,button);
-                show2.setSpacing(60);
-                show2.setAlignment(Pos.CENTER);
-
-                row3.getChildren().remove(choice7);
-                row3.getChildren().remove(choice8);
-
-                setAlignment(Pos.CENTER); //alignment of the grid in the scene
-                setSpacing(20);
-                getChildren().addAll(show2);
-
-                }
-            });
-
-
-            option2.setOnAction(new EventHandler<ActionEvent>() {
-                public void handle(ActionEvent t) {
-                    Stage stage = (Stage) option2.getScene().getWindow();
-	                stage.close();
-                    Stage stage2 = new Stage();
-                    Scene scene = new Scene(new AddItemPane(application, index), 800, 600);
-                    stage2.setTitle("Profile");
-                    stage2.setScene(scene);
-                    stage2.show();
-                    }
-                });
         setStyle("-fx-background-color: #FFE5CC");
         setAlignment(Pos.CENTER); //alignment of the grid in the scene
         setSpacing(50);
-        getChildren().addAll(show);
+        getChildren().addAll(showOptions);
+    }
 
+    /**
+     * Event handler for when the category selector change
+     * @param event
+     */
+    private void categoryEvent(Event event) {
+        inputCategory = (String) selectCategory.getValue();
+        if(inputCategory =="Tops"){
+            type.setText("Choose witch type of "+ inputCategory +":");
+            addTopCategory();
+        }
+        else if(inputCategory =="Bottoms"){
+            type.setText("Choose witch type of "+ inputCategory +":");
+            addBottomCategory();
+        }
+        else if(inputCategory =="Dresses"){
+            type.setText("Choose witch type of "+ inputCategory +":");
+            addDressCategory();
+        }
+        else if(inputCategory =="Accessories"){
+            type.setText("Choose witch type of "+ inputCategory +":");
+            addAccessorizeCategory();
+        }
+    }
 
-       }
+    /**
+     * Event handler for when the doneOptions button is clicked
+     * if all fields are corrects it creates a new item and add it to the wardrobe returning to the HomePane otherwise an alert is generated
+     * @param actionEvent
+     */
+    private void doneOptionsEvent(ActionEvent actionEvent) {
+        inputColor =(String) selectColor.getValue();
+        inputSeason =(String) selectSeason.getValue();
+        inputOccasion =(String) selectOccasion.getValue();
+        inputFavorite = yes.isSelected() ? "yes" : "no";
+        //inputFavorite =(String) selectFavorite.getValue();
+        inputType =(String) selectType.getValue();
+        inputCategory =(String) selectCategory.getValue();
+        inputDescription = (String) chooseDescription.getText();
+        if (chooseImagePath.getText().isEmpty()) {
+            switch(inputCategory){
+                case "Top":{
+                    switch (inputCategory){
+                        case "TShirt":{
+                            inputPath = "images/tshirt.png";
+                            break;
+                        }
+                        case "Sweater":{
+                            inputPath = "images/sweater.png";
+                            break;
+                        }
+                        case "SweatshirtAndHoodie":{
+                            inputPath = "images/sweatshirtAndHoodie.png";
+                            break;
+                        }
+                        case "TopAndBody" :{
+                            inputPath = "images/topAndBody.png";
+                            break;
+                        }
+                        case "JacketAndCoat":{
+                            inputPath = "images/jacketAndCoat.png";
+                            break;
+                        }
+                        case "TankTop":{
+                            inputPath = "images/tankTop.png";
+                            break;
+                        }
+                    }
+                    break;
+                }
+                case "Bottom":{
+                    switch (inputCategory){
+                        case "Skirt":{
+                            inputPath = "images/skirt.png";
+                            break;
+                        }
+                        case "Jeans":{
+                            inputPath = "images/jeans.png";
+                            break;
+                        }
+                        case "Trouser":{
+                            inputPath = "images/trouser.png";
+                            break;
+                        }
+                        case "Shorts" :{
+                            inputPath = "images/shorts.png";
+                            break;
+                        }
+                    }
+                    break;
+                }
+                case "Dress":{
+                    switch (inputCategory){
+                        case "Longs":{
+                            inputPath = "images/longD.jpg";
+                            break;
+                        }
+                        case "Shorts":{
+                            inputPath = "images/shortD.jpg";
+                            break;
+                        }
+                    }
+                    break;
+                }
+                case "Accessories":{
+                    switch (inputCategory){
+                        case "Jewelry":{
+                            inputPath = "images/jewelry.jpg";
+                            break;
+                        }
+                        case "Hat":{
+                            inputPath = "images/hat.jpg";
+                            break;
+                        }
+                        case "Belt":{
+                            inputPath = "images/belt.jpg"; ;
+                            break;
+                        }
+                        case "Glasses" :{
+                            inputPath = "images/glasses.jpg";
+                            break;
+                        }
+                        case "Scarf":{
+                            inputPath = "images/scarf.jpg";
+                            break;
+                        }
+                        case "Gloves":{
+                            inputPath = "images/gloves.jpg";
+                            break;
+                        }
+                        case "Purse":{
+                            inputPath = "images/purse.jpg";
+                            break;
+                        }
+                        case "Shoes" :{
+                            inputPath = "images/shoes.jpg";
+                            break;
+                        }
+                        case "ForTheHair" :{
+                            inputPath = "images/forTheHair.jpg";
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+        else {
+            inputPath = "images/" + chooseImagePath.getText();
+        }
+
+        //if any of the combobox is not completed it does not proceed in the creation of the item and an alert is generated
+        if(inputColor ==null || inputSeason ==null || inputOccasion ==null || inputCategory ==null || inputType ==null){ //inputFavorite ==null ||
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText(null);
+            alert.setContentText("Please choose from every combobox a field!");
+            alert.showAndWait();
+        }
+        //Otherwise, the new item is created and the user is redirected to the HomePane
+        else{
+            //if there is no given description the default is an empty string
+            if (inputDescription ==null){
+                inputDescription ="";
+            }
+            //creates the correct item based on the user's selection and add the to the closet
+            switch(inputCategory){
+                case ("Tops"):{
+                    Top nT = new Top(inputSeason, inputOccasion, inputColor, inputType, inputFavorite, inputPath, inputDescription);
+                    application.getWardrobe(index).addItem(nT);
+                    break;
+                }
+                case ("Bottoms"):{
+                    Bottom nB = new Bottom(inputSeason, inputOccasion, inputColor, inputType, inputFavorite, inputPath, inputDescription);
+                    application.getWardrobe(index).addItem(nB);
+                    break;
+                }
+                case ("Dresses"):{
+                    Dress nD = new Dress(inputSeason, inputOccasion, inputColor, inputType, inputFavorite, inputPath, inputDescription);
+                    application.getWardrobe(index).addItem(nD);
+                    break;
+                }
+                case ("Accessories"):{
+                    Accessorize nA = new Accessorize(inputSeason, inputOccasion, inputColor, inputType, inputFavorite, inputPath, inputDescription);
+                    application.getWardrobe(index).addItem(nA);
+                    break;
+                }
+            }
+
+            //return so HomePane
+            Stage stage = (Stage) doneOptions.getScene().getWindow();
+            stage.close();
+            Stage stage2 = new Stage();
+            Scene scene = new Scene(new HomePane(application, index), 800, 600);
+            stage2.setTitle("Home");
+            stage2.setScene(scene);
+            stage2.show();
+        }
+    }
+
+    /**
+     * Event handler for when the doneFromFile button is clicked
+     * if the user inserted a valid JSON file the item is created and added to the wardrobe and then the app returns to the HomePane otherwise an alert is generated
+     * @param actionEvent
+     */
+    private void doneFromFileEvent(ActionEvent actionEvent) {
+        inputCategory = (String) selectCategory.getValue();
+        inputFilePath = (String) chooseFilePath.getText();
+
+        //if the ComboBox or the TextField is not completed it does not proceed in the creation of the item and an alert is generated
+        if(inputCategory == null || inputFilePath.isEmpty() == true){
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill both the ComboBox and the TextField!");
+            alert.showAndWait();
+        }
+        //Otherwise, the new item is created and the user is redirected to the HomePane
+        else{
+            //creates the correct item based on the user's selection and add the to the closet
+            switch(inputCategory){
+                case ("Tops"):{
+                    Top nT = new Top(inputFilePath);
+                    application.getWardrobe(index).addItem(nT);
+                    break;
+                }
+                case ("Bottoms"):{
+                    Bottom nB = new Bottom(inputFilePath);
+                    application.getWardrobe(index).addItem(nB);
+                    break;
+                }
+                case ("Dresses"):{
+                    Dress nD = new Dress(inputFilePath);
+                    application.getWardrobe(index).addItem(nD);
+                    break;
+                }
+                case ("Accessories"):{
+                    Accessorize nA = new Accessorize(inputFilePath);
+                    application.getWardrobe(index).addItem(nA);
+                    break;
+                }
+            }
+
+            //return so HomePane
+            Stage stage = (Stage) doneOptions.getScene().getWindow();
+            stage.close();
+            Stage stage2 = new Stage();
+            Scene scene = new Scene(new HomePane(application, index), 800, 600);
+            stage2.setTitle("Home");
+            stage2.setScene(scene);
+            stage2.show();
+        }
+    }
+
+    /**
+     * Event handler for when the logo image is clicked
+     * return to HomePane
+     * @param event
+     */
+    public void logoEvent (MouseEvent event){
+        Stage stage = (Stage) logo.getScene().getWindow();
+        stage.close();
+        Stage stage2 = new Stage();
+        Scene scene = new Scene(new HomePane(application, index), 800, 600);
+        stage2.setTitle("app.Seasons");
+        stage2.setScene(scene);
+        stage2.show();
+    }
+
+    /**
+     * Display the items necessary for the user to creat its item from scratch
+     * @param event
+     */
+    public void optionOptionsEvent(ActionEvent event){
+        /*if (getChildren()!=showOptions){
+            getChildren().clear();
+            setAlignment(Pos.CENTER); //alignment of the grid in the scene
+            setSpacing(20);
+            getChildren().addAll(showOptions);
+        }
+        else{
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            //alert.setHeaderText("Look, an Information Dialog");
+            alert.setContentText("You are already in the page that allows you to create a new item from scratch");
+
+            alert.showAndWait();
+        }
+        //showOptions.getChildren().clear();*/
+    }
+
+    /**
+     * Display the items necessary for the user to creat its item from a JSON file
+     * @param event
+     */
+    public void optionFromFileEvent(ActionEvent event){
+        getChildren().clear();
+        setAlignment(Pos.CENTER); //alignment of the grid in the scene
+        setSpacing(20);
+        //getChildren().addAll(showFromFile);
+
+        //Stage stage = (Stage) optionFromFile.getScene().getWindow();
+        //stage.close();
+        //Stage stage2 = new Stage();
+        //Scene scene = new Scene(new AddItemPane(application, index), 800, 600);
+        //stage2.setTitle("Profile");
+        //stage2.setScene(scene);
+        //stage2.show();
+    }
 }

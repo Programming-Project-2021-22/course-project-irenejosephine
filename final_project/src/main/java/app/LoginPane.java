@@ -30,8 +30,12 @@ public class LoginPane extends GridPane{
 	private App application;
 	private String usn, psw;
 
-	public LoginPane(App nA){
-		application = nA;
+    /**
+     * Constructor of the object
+     * @param application of type App
+     */
+	public LoginPane(App application){
+        this.application = application;
 		title= new Label("Login");
 		img = new ImageView("images/Profile.png");
 		font = new Font(24);
@@ -51,45 +55,8 @@ public class LoginPane extends GridPane{
 		GridPane.setHalignment(password, HPos.RIGHT);
 		password.setFont(font);
 
-		login.setOnAction(new EventHandler<ActionEvent>() {
-		    public void handle(ActionEvent t) {
-		        usn = inputusername.getText();
-		        psw = inputpassword.getText();
-		        if(application.checkUsrAndPsw(usn, psw)==true){
-		            Stage stage = (Stage) login.getScene().getWindow();
-		            stage.close();
-		            Stage stage2 = new Stage();
-		                    Scene scene = new Scene(new HomePane(application, application.getUserIndex(usn)), 800, 600);
-		                    stage2.setTitle("Home");
-		                    stage2.setScene(scene);
-		                    stage2.show();
-		        }
-		        else{
-		        	/*
-		        	 * if the username of pasword are not correct a warning dialog is open, at the same time the
-		        	 * input on the textfiel is canceled so the user can type again its credentials
-		        	 */
-					Alert alert = new Alert(AlertType.WARNING);
-					alert.setTitle("Warning");
-					alert.setHeaderText(null);
-					alert.setContentText("Please insert the correct credentials");
-					alert.showAndWait();
-					inputpassword.clear();
-					inputusername.clear();
-		        }
-		    }
-		});
-		singup.setOnAction(new EventHandler<ActionEvent>() {
-		    public void handle(ActionEvent t) {
-		        Stage stage = (Stage) singup.getScene().getWindow();
-		        stage.close();
-		        Stage stage2 = new Stage();
-		                Scene scene = new Scene(new RegisterPane(application), 800, 600);
-		                stage2.setTitle("Register");
-		                stage2.setScene(scene);
-		                stage2.show();
-		    }
-		});
+        login.setOnAction(this::loginEvent);
+		singup.setOnAction(this::signInEvent);
 
 		setAlignment(Pos.CENTER); //alignment of the grid in the scene
 		setHgap(20); // horizontal gap between cells
@@ -108,4 +75,50 @@ public class LoginPane extends GridPane{
 		add(singup, 1, 3);
 	}
 
+    /**
+     * Event handler for when the button login is clicked
+     * goes to HomePane if the username and password are correct otherwise an Alert is generated
+     * @param event
+    */
+    public void loginEvent(ActionEvent event){
+        usn = inputusername.getText();
+        psw = inputpassword.getText();
+        if(application.checkUsrAndPsw(usn, psw)==true){
+            Stage stage = (Stage) login.getScene().getWindow();
+            stage.close();
+            Stage stage2 = new Stage();
+            Scene scene = new Scene(new HomePane(application, application.getUserIndex(usn)), 800, 600);
+            stage2.setTitle("Home");
+            stage2.setScene(scene);
+            stage2.show();
+        }
+        else{
+            /*
+             * if the username of pasword are not correct a warning dialog is open, at the same time the
+             * input on the textfiel is canceled so the user can type again its credentials
+             */
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText(null);
+            alert.setContentText("Please insert the correct credentials");
+            alert.showAndWait();
+            inputpassword.clear();
+            inputusername.clear();
+        }
+    }
+
+    /**
+     * Event handler for when the button signIn is clicked
+     * goes to RegisterPane
+     * @param event
+     */
+    public void signInEvent (ActionEvent event){
+        Stage stage = (Stage) singup.getScene().getWindow();
+        stage.close();
+        Stage stage2 = new Stage();
+        Scene scene = new Scene(new RegisterPane(application), 800, 600);
+        stage2.setTitle("Register");
+        stage2.setScene(scene);
+        stage2.show();
+    }
 }

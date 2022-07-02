@@ -1,7 +1,7 @@
 package app;
 import java.util.Optional;
-
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,7 +14,6 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -30,217 +29,177 @@ import javafx.stage.Stage;
  * @author Josephine Sacchetto
  */
 public class HomePane extends HBox {
-    private String applyfilter[]= new String[3];
+    private String appliedFilter[]= new String[3];
     private App application;
     private int index;
     private Font font;
     private Label title;
     private ButtonType ok;
-    private ButtonType delte;
-    //private Menu all, tops, bottom, dresses, accessories, ocasions, seasons, favorites ;
+    private ButtonType delete;
+    private Menu all, tops, bottoms, dresses, accessories, occasions, seasons, favorites ;
+    private MenuItem allItems; //all
+    private MenuItem tShirt, sweater, sweatshirtAndHoodie, topAndBody, jacketAndCoat, tankTop; //tops
+    private MenuItem skirt, jeans, trouser, shorts; //bottoms
+    private MenuItem lengthy, little; //dresses
+    private MenuItem jewelry, hat, belt, glasses, scarf, gloves, purse, shoes, forTheHair; //accessorise
+    private MenuItem fav; //favourites
+    private MenuBar mb;
+    private Button add;
+    private ImageView profile, logo, backgroudView;
+    private ComboBox occasionsFilter, colorsFilter, seasonsFilter;
+    private Image backgroud;
 
-    public HomePane(App ap, int i){
-    	application = ap;
-    	index = i;
+    /**
+     * Constructor of the object
+     * @param application
+     * @param index
+     */
+    public HomePane(App application, int index){
+        this.application = application;
+        this.index = index;
 	    font = new Font(24);
 	    title = new Label ("title");
 	    title.setFont(font);
 
 
-	    // create a menubar
-	    MenuBar mb = new MenuBar();
+	    // creates a menubar
+	    mb = new MenuBar();
+	    // creates all items in the MenuBar and theirs values (All, Tops, Bottoms, Dresses Accessories, Favourites)
 
-	    // create a menu
-	    Menu all = new Menu("All items");
-	    // create menuitems
-	    MenuItem allitems = new MenuItem("All");
-	    // add menu items to menu
-	    all.getItems().add(allitems);
-	    // add menu to menubar
-	    mb.getMenus().add(all);
-
-	    // create a menu
-	    Menu tops = new Menu("Tops");
-	    // create menuitems
-	    MenuItem tshirts = new MenuItem("T-shirts");
+	    //fist menu -> All items
+        all = new Menu("All items");
+	    allItems = new MenuItem("All"); // create menuitems
+	    all.getItems().add(allItems);// add menu items to menu
 
 
-	    MenuItem shirts = new MenuItem("Shirts");
-	    MenuItem pullovers = new MenuItem("Pullovers");
-	    MenuItem sweatshirts = new MenuItem("Sweatshirts");
-	    MenuItem jackets = new MenuItem("Jackets");
-	    MenuItem bodies = new MenuItem("Bodies");
-	    MenuItem undershirts = new MenuItem("Undershirts");
-	    // add menu items to menu
-	    tops.getItems().add(tshirts);
-	    tops.getItems().add(shirts);
-	    tops.getItems().add(pullovers);
-	    tops.getItems().add(sweatshirts);
-	    tops.getItems().add(jackets);
-	    tops.getItems().add(bodies);
-	    tops.getItems().add(undershirts);
-	    // add menu to menubar
-	    mb.getMenus().add(tops);
 
-	    // create a menu
-	    Menu bottom = new Menu("Bottom");
-	    // create menuitems
-	    MenuItem skirt = new MenuItem("Skirt");
-	    MenuItem jeans = new MenuItem("Jeans");
-	    MenuItem pants = new MenuItem("Pants");
-	    MenuItem shorts = new MenuItem("Shorts");
-	    // add menu items to menu
-	    bottom.getItems().add(skirt);
-	    bottom.getItems().add(jeans);
-	    bottom.getItems().add(pants);
-	    bottom.getItems().add(shorts);
-	    // add menu to menubar
-	    mb.getMenus().add(bottom);
+        //second menu -> Top
+        tops = new Menu("Tops");
+        tShirt = new MenuItem("T-shirts");
+        sweater = new MenuItem("T-shirts");
+        sweatshirtAndHoodie = new MenuItem("Sweatshirt and hoodie");
+        topAndBody = new MenuItem("Top and body");
+        jacketAndCoat = new MenuItem("Jacket and coat");
+        tankTop = new MenuItem("Tank Top");
+        tops.getItems().addAll(tShirt, sweater, sweatshirtAndHoodie, topAndBody, jacketAndCoat, tankTop);
 
-	    // create a menu
-	    Menu dresses = new Menu("Dresses");
-	    // create menuitems
-	    MenuItem lengthy= new MenuItem("Long");
-	    MenuItem little= new MenuItem("Short");
-	    // add menu items to menu
-	    dresses.getItems().add(lengthy);
-	    dresses.getItems().add(little);
-	    // add menu to menubar
-	    mb.getMenus().add(dresses);
+        // third menu -> Bottoms
+	    bottoms = new Menu("Bottom");
+	    skirt = new MenuItem("Skirt");
+	    jeans = new MenuItem("Jeans");
+	    trouser = new MenuItem("Trouser");
+	    shorts = new MenuItem("Shorts");
+	    bottoms.getItems().addAll(skirt, jeans, trouser, shorts);
 
-	    // create a menu
-	    Menu accessories = new Menu("Accessories");
-	    // create menuitems
-	    MenuItem jewelry= new MenuItem("Jewelry");
-	    MenuItem bags= new MenuItem("Bags");
-	    MenuItem hats= new MenuItem("Hats");
-	    MenuItem belts= new MenuItem("Belts");
-	    MenuItem glasses= new MenuItem("Glasses");
-	    MenuItem scarves= new MenuItem("Scarves");
-	    MenuItem forhair= new MenuItem("For hair");
-	    MenuItem gloves= new MenuItem("Gloves");
-	    MenuItem shoes= new MenuItem("Shoes");
-	    // add menu items to menu
-	    accessories.getItems().add(jewelry);
-	    accessories.getItems().add(bags);
-	    accessories.getItems().add(hats);
-	    accessories.getItems().add(belts);
-	    accessories.getItems().add(glasses);
-	    accessories.getItems().add(scarves);
-	    accessories.getItems().add(forhair);
-	    accessories.getItems().add(gloves);
-	    accessories.getItems().add(shoes);
-	    // add menu to menubar
-	    mb.getMenus().add(accessories);
 
-	    // create a menu
-	    Menu ocasions = new Menu("Occasions");
-	    // create menuitems
-	    MenuItem elegant= new MenuItem("Elegant");
-	    MenuItem sporty= new MenuItem("Sporty");
-	    MenuItem everyday= new MenuItem("Every Day");
-	    // add menu items to menu
-	    ocasions.getItems().add(elegant);
-	    ocasions.getItems().add(sporty);
-	    ocasions.getItems().add(everyday);
-	    // add menu to menubar
-	    mb.getMenus().add(ocasions);
+	    // fourth menu -> Dresses
+	    dresses = new Menu("Dresses");
+	    lengthy= new MenuItem("Long");
+	    little= new MenuItem("Short");
+	    dresses.getItems().addAll(lengthy, little);
 
-	    // create a menu
-	    Menu seasons = new Menu("Seasons");
-	    // create menuitems
-	    MenuItem summer= new MenuItem("Summer");
-	    MenuItem autumn= new MenuItem("Autumn");
-	    MenuItem winter= new MenuItem("Winter");
-	    MenuItem spring= new MenuItem("Spring");
-	    // add menu items to menu
-	    seasons.getItems().add(summer);
-	    seasons.getItems().add(autumn);
-	    seasons.getItems().add(winter);
-	    seasons.getItems().add(spring);
-	    // add menu to menubar
-	    mb.getMenus().add(seasons);
+	    // fifth menu -> Accessories
+	    accessories = new Menu("Accessories");
+	    jewelry= new MenuItem("Jewelry");
+	    hat= new MenuItem("Hats");
+	    belt= new MenuItem("Belts");
+	    glasses= new MenuItem("Glasses");
+	    scarf= new MenuItem("Scarfs");
+	    gloves= new MenuItem("Gloves");
+	    purse= new MenuItem("Purses");
+	    shoes= new MenuItem("Shoes");
+	    forTheHair= new MenuItem("For the hair");
+        accessories.getItems().addAll(jewelry, hat, belt, glasses, scarf, gloves, purse, shoes, forTheHair);
 
-	    // create a menu
-	    Menu favorites = new Menu("Favorites");
-	    // create menuitems
-	    MenuItem fav = new MenuItem("fav");
-	    // add menu items to menu
+        // sixth menu -> Favorites
+	    favorites = new Menu("Favorites");
+	    fav = new MenuItem("fav");
 	    favorites.getItems().add(fav);
-	    // add menu to menubar
-	    mb.getMenus().add(favorites);
 
-	    Button add= new Button("+");
+        //add all menus to the MenuBar
+        mb.getMenus().addAll(all, tops, bottoms, dresses, accessories, favorites);// add menus to menubar
+        //event handlers
+        all.setOnAction(new EventHandler<ActionEvent>() {
+            //richiama il metodo getItems di App
+            //creates a new window
+            public void handle(ActionEvent t) {
+                setStyle("-fx-background-color: #FFE5CC");
 
-	    add.setOnAction(new EventHandler<ActionEvent>() {
-	        public void handle(ActionEvent t) {
-	            Stage stage = (Stage) add.getScene().getWindow();
-	            stage.close();
-	            Stage stage2 = new Stage();
-	            Scene scene = new Scene(new AddItemPane(application, index), 800, 600);
-	            stage2.setTitle("Add Items");
-	            stage2.setScene(scene);
-	            stage2.show();
-	        }
-	    });
+                /*VBox show = new VBox (menu,label,filter,cardsr1,cardsr2);
+                show.setSpacing(20);
 
-	    ImageView profile = new ImageView("images/Profile2.png");
+                setSpacing(50);
+                getChildren().addAll(show);*/
+
+            }
+        });
+
+        //allItems.addEventHandler(this::allItemsEvent);
+        /*tShirt.addEventHandler(new EventHandler<ActionEvent>(){this::tShirtEvent}); //this::tShirtEvent);
+        sweater.addEventHandler(this::sweaterEvent);
+        sweatshirtAndHoodie.addEventHandler(this::sweatshirtAndHoodieEvent);
+        topAndBody.addEventHandler(this::topAndBodyEvent);
+        jacketAndCoat.addEventHandler(this::jacketAndCoatEvent);
+        tankTop.addEventHandler(this::tankToEvent);
+        skirt.addEventHandler(this::skirtEvent);
+        jeans.addEventHandler(this::jeansEvent);
+        trouser.addEventHandler(this::trouserEvent);
+        shorts.addEventHandler(this::shortsEvent);
+        lengthy.addEventHandler(this::lenghtyEvent);
+        little.addEventHandler(this::littleEvent);
+        jewelry.addEventHandler(this::jewelryEvent);
+        hat.addEventHandler(this::hatEvent);
+        belt.addEventHandler(this::beltEvent);
+        glasses.addEventHandler(this::glassesEvent);
+        scarf.addEventHandler(this::scarfEvent);
+        gloves.addEventHandler(this::glovesEvent);
+        purse.addEventHandler(this::purseEvent);
+        shoes.addEventHandler(this::shoesEvent);
+        forTheHair.addEventHandler(this::forTheHairEvent);
+        fav.addEventHandler(this::favEvent);*/
+
+        //add button and event handler
+	    add= new Button("+");
+        add.setOnAction(this::addEvent);
+
+
+        //profile image and event handler
+	    profile = new ImageView("images/Profile2.png");
 	    profile.setPickOnBounds(true); // allows click on transparent areas
-	    profile.setOnMouseClicked((MouseEvent e) -> {
-	        Stage stage = (Stage) profile.getScene().getWindow();
-	        stage.close();
-	        Stage stage2 = new Stage();
-	        Scene scene = new Scene(new ProfilePane(application, index), 800, 600);
-	        stage2.setTitle("Profile");
-	        stage2.setScene(scene);
-	        stage2.show();
-	        });
+        profile.setOnMouseClicked(this::profileEvent);
 
-	    ImageView logo = new ImageView("images/Logo.png");
+        //logo image
+        logo = new ImageView("images/Logo.png");
 
-	    //filtro
-	    ComboBox filter1  = new ComboBox();
+	    //filters
+        //first filter -> occasions
+	    occasionsFilter = new ComboBox();
+        occasionsFilter.getItems().addAll("formal", "every day", "semiformal", "sporty");
+        occasionsFilter.setOnAction(this::occasionsFilterEvent);
 
-	    filter1.getItems().add("None");
-	    filter1.getItems().add("Choice 2");
-	    filter1.getItems().add("Choice 3");
+	    //second filter -> colors
+	    colorsFilter  = new ComboBox();
+        colorsFilter.getItems().addAll( "White", "Black", "Pink", "Blue", "Red", "Yellow", "Green", "Beige", "Brown", "Orange");
+        colorsFilter.setOnAction(this::colorsFilterEvent);
 
-	    filter1.setOnAction((event) -> {
-	        System.out.println(filter1.getValue());
-	    });
-	    //filtro
-	    ComboBox filter2  = new ComboBox();
+	    //third filter -> seasons
+        seasonsFilter  = new ComboBox();
+        seasonsFilter.getItems().addAll( "Winter", "Spring", "Summer", "Fall");
+        seasonsFilter.setOnAction(this::seasonsFilterEvent);
 
-	    filter2.getItems().add("None");
-	    filter2.getItems().add("Choice 2");
-	    filter2.getItems().add("Choice 3");
+	    //background image
+	    backgroud = new Image("images/Wardrobe.jpg");
+	    backgroudView = new ImageView(backgroud);
+	    backgroudView.setFitHeight(160);
+	    backgroudView.setFitWidth(160);
+	    backgroudView.setPreserveRatio(true);
 
-	    filter2.setOnAction((event) -> {
-	        System.out.println(filter2.getValue());
-	    });
-	    //filtro
-	    ComboBox filter3  = new ComboBox();
-
-	    filter3.getItems().add("None");
-	    filter3.getItems().add("Choice 2");
-	    filter3.getItems().add("Choice 3");
-
-	    filter3.setOnAction((event) -> {
-	        System.out.println(filter3.getValue());
-	    });
-
-	    //crea l'immagine all'interno del button
-	    Image img1 = new Image("images/Wardrobe.jpg");
-	    ImageView view1 = new ImageView(img1);
-	    view1.setFitHeight(160);
-	    view1.setFitWidth(160);
-	    view1.setPreserveRatio(true);
-	    //Creating a Button
+        //Creating a Button
 	    Button card1 = new Button();
 	    //Setting the size of the button
 	    card1.setPrefSize(180, 180);
 	    //Setting a graphic to the button
-	    card1.setGraphic(view1);
+	    card1.setGraphic(backgroudView);
 
 	    //crea l'immagine all'interno del button
 	    Image img2 = new Image("images/Wardrobe.jpg");
@@ -315,8 +274,6 @@ public class HomePane extends HBox {
 	    //setHgap(20); // horizontal gap between cells
 	    //setVgap(10);
 
-
-
 	    HBox menu = new HBox(logo,mb,add,profile);
 	    menu.setSpacing(20);
 	    menu.setAlignment(Pos.CENTER);
@@ -325,7 +282,7 @@ public class HomePane extends HBox {
 	    label.setSpacing(20);
 	    label.setAlignment(Pos.CENTER);
 
-	    HBox filter = new HBox(filter1,filter2,filter3,apply);
+	    HBox filter = new HBox(occasionsFilter,colorsFilter,seasonsFilter,apply);
 	    filter.setSpacing(20);
 
 	    HBox cardsr1 = new HBox(card1,card2,card3);
@@ -356,7 +313,7 @@ public class HomePane extends HBox {
             }
         });
 
-        tshirts.setOnAction(new EventHandler<ActionEvent>() {
+        /*tshirts.setOnAction(new EventHandler<ActionEvent>() {
             //richiama il metodo getItems di App
             //creates a new window
             public void handle(ActionEvent t) {
@@ -459,7 +416,7 @@ public class HomePane extends HBox {
                 getChildren().addAll(show);
 
             }
-        });
+        });*/
 
         skirt.setOnAction(new EventHandler<ActionEvent>() {
             //richiama il metodo getItems di App
@@ -492,7 +449,7 @@ public class HomePane extends HBox {
             }
         });
 
-        pants.setOnAction(new EventHandler<ActionEvent>() {
+        /*pants.setOnAction(new EventHandler<ActionEvent>() {
             //richiama il metodo getItems di App
             //creates a new window
             public void handle(ActionEvent t) {
@@ -815,15 +772,15 @@ public class HomePane extends HBox {
                 getChildren().addAll(show);
 
             }
-        });
+        });*/
 
         //se premuto deve far vedere gli items in base ai filtri
         apply.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
                 //se clicchi su none allora nessun filtro (se uguale a none allora nessun filtro applicato)
-                applyfilter[0]=(String) filter1.getValue();
-                applyfilter[1]=(String) filter2.getValue();
-                applyfilter[2]=(String) filter3.getValue();
+                appliedFilter[0]=(String) occasionsFilter.getValue();
+                appliedFilter[1]=(String) colorsFilter.getValue();
+                appliedFilter[2]=(String) seasonsFilter.getValue();
             }
 
         });
@@ -842,11 +799,11 @@ public class HomePane extends HBox {
                 view.setPreserveRatio(true);
                 alert.setGraphic(view);
 
-                alert.getButtonTypes().setAll(delte, ok);
+                alert.getButtonTypes().setAll(delete, ok);
 
 
                 Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == delte){
+                if (result.get() == delete){
                     System.out.println("This is the delte button");
                 }
 
@@ -869,11 +826,11 @@ public class HomePane extends HBox {
                 view.setPreserveRatio(true);
                 alert.setGraphic(view);
 
-                alert.getButtonTypes().setAll(delte, ok);
+                alert.getButtonTypes().setAll(delete, ok);
 
 
                 Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == delte){
+                if (result.get() == delete){
                     System.out.println("This is the delte button");
                 }
 
@@ -895,11 +852,11 @@ public class HomePane extends HBox {
                 view.setPreserveRatio(true);
                 alert.setGraphic(view);
 
-                alert.getButtonTypes().setAll(delte, ok);
+                alert.getButtonTypes().setAll(delete, ok);
 
 
                 Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == delte){
+                if (result.get() == delete){
                     System.out.println("This is the delte button");
                 }
 
@@ -921,11 +878,11 @@ public class HomePane extends HBox {
                 view.setPreserveRatio(true);
                 alert.setGraphic(view);
 
-                alert.getButtonTypes().setAll(delte, ok);
+                alert.getButtonTypes().setAll(delete, ok);
 
 
                 Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == delte){
+                if (result.get() == delete){
                     System.out.println("This is the delte button");
                 }
 
@@ -948,11 +905,11 @@ public class HomePane extends HBox {
                 view.setPreserveRatio(true);
                 alert.setGraphic(view);
 
-                alert.getButtonTypes().setAll(delte, ok);
+                alert.getButtonTypes().setAll(delete, ok);
 
 
                 Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == delte){
+                if (result.get() == delete){
                     System.out.println("This is the delte button");
                 }
 
@@ -975,11 +932,11 @@ public class HomePane extends HBox {
                 view.setPreserveRatio(true);
                 alert.setGraphic(view);
 
-                alert.getButtonTypes().setAll(delte, ok);
+                alert.getButtonTypes().setAll(delete, ok);
 
 
                 Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == delte){
+                if (result.get() == delete){
                     System.out.println("This is the delte button");
                 }
 
@@ -987,4 +944,138 @@ public class HomePane extends HBox {
 
         });
 	    }
+
+    /**
+     * Event handler for when the add button is clicked
+     * goes to AddItemPane
+     * @param event
+     */
+    public void addEvent (ActionEvent event){
+        Stage stage = (Stage) add.getScene().getWindow();
+        stage.close();
+        Stage stage2 = new Stage();
+        Scene scene = new Scene(new AddItemPane(application, index), 800, 600);
+        stage2.setTitle("Add Items");
+        stage2.setScene(scene);
+        stage2.show();
+    }
+
+    /**
+     * Event handler for when the profile Image  is clicked
+     * goes to ProfilePane
+     * @param event
+     */
+    public void profileEvent (MouseEvent event){
+        Stage stage = (Stage) profile.getScene().getWindow();
+        stage.close();
+        Stage stage2 = new Stage();
+        Scene scene = new Scene(new ProfilePane(application, index), 800, 600);
+        stage2.setTitle("Profile");
+        stage2.setScene(scene);
+        stage2.show();
+    }
+
+    public void occasionsFilterEvent(Event event){
+        System.out.println(occasionsFilter.getValue());
+    }
+
+    public void colorsFilterEvent(Event event){
+        System.out.println(colorsFilter.getValue());
+    }
+
+    public void seasonsFilterEvent(Event event){
+        System.out.println(seasonsFilter.getValue());
+    }
+
+    public void allItemsEvent (Event event){
+        //TODO
+    }
+
+    public void tShirtEvent (Event event){
+        //TODO
+    }
+
+    public void sweaterEvent (Event event){
+        //TODO
+    }
+
+    public void sweatshirtAndHoodieEvent (Event event){
+        //TODO
+    }
+
+    public void topAndBodyEvent (Event event){
+        //TODO
+    }
+
+    public void jacketAndCoatEvent (Event event){
+        //TODO
+    }
+
+    public void tankToEvent (Event event){
+        //TODO
+    }
+
+    public void skirtEvent (Event event){
+        //TODO
+    }
+
+    public void jeansEvent (Event event){
+        //TODO
+    }
+
+    public void trouserEvent (Event event){
+        //TODO
+    }
+
+    public void shortsEvent (Event event){
+        //TODO
+    }
+
+    public void lenghtyEvent (Event event){
+        //TODO
+    }
+
+    public void littleEvent (Event event){
+        //TODO
+    }
+
+    public void jewelryEvent (Event event){
+        //TODO
+    }
+
+    public void hatEvent (Event event){
+        //TODO
+    }
+
+    public void beltEvent (Event event){
+        //TODO
+    }
+
+    public void glassesEvent (Event event){
+        //TODO
+    }
+
+    public void scarfEvent (Event event){
+        //TODO
+    }
+
+    public void glovesEvent (Event event){
+        //TODO
+    }
+
+    public void purseEvent (Event event){
+        //TODO
+    }
+
+    public void shoesEvent (Event event){
+        //TODO
+    }
+
+    public void forTheHairEvent (Event event){
+        //TODO
+    }
+
+    public void favEvent (Event event){
+        //TODO
+    }
 }

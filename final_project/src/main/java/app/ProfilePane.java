@@ -19,60 +19,64 @@ import javafx.stage.Stage;
 /**
  * This class generates a scene where the user can access and update its personal data
  * @author Josephine Sacchetto
- *
  */
 public class ProfilePane extends HBox {
-	private String new_username;
-	private String new_password;
-	private String new_photo;
+	private String newUsername, newPassword, newPhoto;
     private App application;
     private int index;
+    private ImageView logo, profileView;
+    private Image profile;
+    private TextField inputUsername, inputPassword, inputEmail, inputPhone, inputPath;
+    private TextArea inputDescription;
+    private Label path, username, password, email, phone, description;
+    private Button removeAccount, editAccount, done;
+    private HBox top;
+    private VBox left, right;
 
+    /**
+     * Constructor of the object
+     * @param application of type App
+     * @param index is the index in the App arrays from where the wardrobe and all its information is loaded
+     */
+    public ProfilePane(App application, int index){
+        //import of the data passed as parameter from the previous pane
+        this.application = application;
+        this.index = index;
 
-    public ProfilePane(App ap, int i){
-    	application = ap;
-    	index = i;
-
-        ImageView logo = new ImageView("images/Logo.png");
+        //logo image and event handler
+        logo = new ImageView("images/Logo.png");
         logo.setPickOnBounds(true); // allows click on transparent areas
-        logo.setOnMouseClicked((MouseEvent e) -> {
-                Stage stage = (Stage) logo.getScene().getWindow();
-                stage.close();
-                Stage stage2 = new Stage();
-                Scene scene = new Scene(new HomePane(application, index), 800, 600);
-                stage2.setTitle("Home");
-                stage2.setScene(scene);
-                stage2.show();
-            });
+        logo.setOnMouseClicked(this::logoEvent);//MouseEvent e)
 
-        Image profile = new Image("profile.png");
-        ImageView view = new ImageView(profile);
-        view.setFitHeight(150);
-        view.setPreserveRatio(true);
+        //profile image
+        profile = new Image("images/profile.png");
+        profileView = new ImageView(profile);
+        profileView.setFitHeight(150);
+        profileView.setPreserveRatio(true);
 
         Font font = new Font(20);
         //inserire quello che l'utente aveva immesso quando si è registrato
-        TextField inputusername = new TextField(application.getWardrobe(index).getUsername());
-        TextField inputpassword = new TextField(application.getWardrobe(index).getPassword());
-        TextField inputemail = new TextField(application.getWardrobe(index).getEmail());
-        TextField inputphone = new TextField(application.getWardrobe(index).getPhone());
-        TextArea inputdescription = new TextArea(application.getWardrobe(index).getDescription());
-        TextField inputpath = new TextField();
-        Label path = new Label("Insert the path of the profile photo:");
-        Label username = new Label("Username: ");
-        Label password = new Label("Password: ");
-        Label email = new Label("E-mail: ");
-        Label phone = new Label("Phone number: ");
-        Label description = new Label("Status: ");
-        Button removeaccount = new Button("Delete Account");
-        Button editaccount = new Button("Edit Account");
-        Button done = new Button ("Done");
+        inputUsername = new TextField(application.getWardrobe(index).getUsername());
+        inputPassword = new TextField(application.getWardrobe(index).getPassword());
+        inputEmail = new TextField(application.getWardrobe(index).getEmail());
+        inputPhone = new TextField(application.getWardrobe(index).getPhone());
+        inputDescription = new TextArea(application.getWardrobe(index).getDescription());
+        inputPath = new TextField();
+        path = new Label("Insert the path of the profile photo:");
+        username = new Label("Username: ");
+        password = new Label("Password: ");
+        email = new Label("E-mail: ");
+        phone = new Label("Phone number: ");
+        description = new Label("Status: ");
+        removeAccount = new Button("Delete Account");
+        editAccount = new Button("Edit Account");
+        done = new Button ("Done");
 
-        inputusername.setEditable(false);
-        inputpassword.setEditable(false);
-        inputemail.setEditable(false);
-        inputphone.setEditable(false);
-        inputdescription.setEditable(false);
+        inputUsername.setEditable(false);
+        inputPassword.setEditable(false);
+        inputEmail.setEditable(false);
+        inputPhone.setEditable(false);
+        inputDescription.setEditable(false);
 
         username.setFont(font);
         password.setFont(font);
@@ -81,103 +85,126 @@ public class ProfilePane extends HBox {
         description.setFont(font);
         path.setFont(font);
 
-        inputdescription.setMaxWidth(300);
-        inputdescription.setStyle("-fx-background-color: -fx-control-inner-background;-fx-background-insets: 0;-fx-padding: 1 3 1 3;");
-        inputdescription.setWrapText(true);
-        inputdescription.setPrefHeight(80);  //sets height of the TextArea to 400 pixels
-        inputdescription.setPrefWidth(300);
+        inputDescription.setMaxWidth(300);
+        inputDescription.setStyle("-fx-background-color: -fx-control-inner-background;-fx-background-insets: 0;-fx-padding: 1 3 1 3;");
+        inputDescription.setWrapText(true);
+        inputDescription.setPrefHeight(80);  //sets height of the TextArea to 400 pixels
+        inputDescription.setPrefWidth(300);
 
         done.setVisible(false);
 
-        inputpath.setVisible(false);
+        inputPath.setVisible(false);
         path.setVisible(false);
 
         setStyle("-fx-background-color: #FFE5CC");
         setAlignment(Pos.CENTER);
 
-        HBox top=new HBox(logo);
+        top=new HBox(logo);
         top.setAlignment(Pos.TOP_LEFT);
 
-        VBox left = new VBox(view, description,inputdescription,path,inputpath, done);
+        left = new VBox(profileView, description, inputDescription,path, inputPath, done);
         left.setAlignment(Pos.CENTER);
         left.setSpacing(5);
 
-        VBox right = new VBox(username,inputusername,password,inputpassword,email, inputemail, phone, inputphone, removeaccount,editaccount);
+        right = new VBox(username, inputUsername,password, inputPassword,email, inputEmail, phone, inputPhone, removeAccount, editAccount);
         right.setAlignment(Pos.CENTER_LEFT);
         right.setSpacing(15);
 
         setSpacing(50);
         getChildren().addAll(top,right,left);
 
-        removeaccount.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent t) {
-            	application.removeUser(index);
-                Stage stage = (Stage) removeaccount.getScene().getWindow();
-                stage.close();
-                    Stage stage2 = new Stage();
-                        Scene scene = new Scene(new LoginPane(application), 800, 600);
-                        stage2.setTitle("Login");
-                        stage2.setScene(scene);
-                        stage2.show();
-            }
-        });
+        //event handlers
+        removeAccount.setOnAction(this::removeAccountEvent);
+        editAccount.setOnAction(this::editAccountEvent);
+        done.setOnAction(this::doneEvent);
 
+    }
 
-        editaccount.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent t) {
+    /**
+     * Event handler for when the logo image is clicked
+     * return to the HomePane
+     * @param event
+     */
+    public void logoEvent(MouseEvent event){
+        Stage stage = (Stage) logo.getScene().getWindow();
+        stage.close();
+        Stage stage2 = new Stage();
+        Scene scene = new Scene(new HomePane(application, index), 800, 600);
+        stage2.setTitle("Home");
+        stage2.setScene(scene);
+        stage2.show();
+    }
 
-                inputusername.setEditable(true);
-                inputpassword.setEditable(true);
-                inputemail.setEditable(true);
-                inputphone.setEditable(true);
-                inputdescription.setEditable(true);
-                removeaccount.setVisible(false);
-                editaccount.setVisible(false);
-                done.setVisible(true);
-                path.setVisible(true);
-                inputpath.setVisible(true);
-                view.setVisible(false);
-                //left.setSpacing(10);
-                left.setAlignment(Pos.TOP_CENTER);
+    /**
+     * Event handler for when the removeAccount button is clicked
+     * return to the LoginPane
+     * @param event
+     */
+    public void removeAccountEvent(ActionEvent event){
+        application.removeUser(index);
+        Stage stage = (Stage) removeAccount.getScene().getWindow();
+        stage.close();
+        Stage stage2 = new Stage();
+        Scene scene = new Scene(new LoginPane(application), 800, 600);
+        stage2.setTitle("Login");
+        stage2.setScene(scene);
+        stage2.show();
+    }
 
-            }
-        });
+    /**
+     * Event handler for when the editAccount button is clicked
+     * set  the TextFiels as editable
+     * @param event
+     */
+    public void editAccountEvent (ActionEvent event){
+        inputUsername.setEditable(true);
+        inputPassword.setEditable(true);
+        inputEmail.setEditable(true);
+        inputPhone.setEditable(true);
+        inputDescription.setEditable(true);
+        removeAccount.setVisible(false);
+        editAccount.setVisible(false);
+        done.setVisible(true);
+        path.setVisible(true);
+        inputPath.setVisible(true);
+        profileView.setVisible(false);
+        //left.setSpacing(10);
+        left.setAlignment(Pos.TOP_CENTER);
+    }
 
-        done.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent t) {
+    /**
+     * Event handler for when the done button is clicked
+     * set the new value of username, password, email, phone number and description based on the value inserted by
+     * the user and return to the profilePane after setting as uneditable the TextFiels
+     * @param event
+     */
+    public void doneEvent (ActionEvent event){
+        application.getWardrobe(index).setUsername(inputUsername.getText());
+        application.getWardrobe(index).setPassword(inputPassword.getText());
+        application.getWardrobe(index).setEmail(inputEmail.getText());
+        application.getWardrobe(index).setPhone(inputPhone.getText());
+        application.getWardrobe(index).setDescription(inputDescription.getText());
+        newPhoto = inputPath.getText();
 
-                //fare il get di quello che viene passato in input e un controllo se non viene inserito niente( in realta quando non inserisce niente restituisce le stringe iniziali) e se il path è accettabile
-            	application.getWardrobe(index).setUsername(inputusername.getText());
-            	application.getWardrobe(index).setPassword(inputpassword.getText());
-            	application.getWardrobe(index).setEmail(inputemail.getText());
-            	application.getWardrobe(index).setDescription(inputdescription.getText());
-                new_photo=inputpath.getText();
-                System.out.println(new_photo);
+        //controllo su quello che viene inserito?
+        inputUsername.setEditable(false);
+        inputPassword.setEditable(false);
+        inputEmail.setEditable(false);
+        inputPhone.setEditable(false);
+        inputDescription.setEditable(false);
+        removeAccount.setVisible(true);
+        editAccount.setVisible(true);
+        done.setVisible(false);
+        path.setVisible(false);
+        inputPath.setVisible(false);
+        profileView.setVisible(true);
+        left.setAlignment(Pos.CENTER);
 
-                //controllo su quello che viene inserito?
+        //come cambiare la photo di default?
 
-                inputusername.setEditable(false);
-                inputpassword.setEditable(false);
-                inputemail.setEditable(false);
-                inputphone.setEditable(false);
-                inputdescription.setEditable(false);
-                removeaccount.setVisible(true);
-                editaccount.setVisible(true);
-                done.setVisible(false);
-                path.setVisible(false);
-                inputpath.setVisible(false);
-                view.setVisible(true);
-                left.setAlignment(Pos.CENTER);
-
-                //come cambiare la photo di default?
-
-                // Image profile = new Image("\""+new_photo+"\"");
-                // ImageView view = new ImageView(profile);
-                // view.setFitHeight(150);
-                // view.setPreserveRatio(true);
-
-            }
-        });
-
+        // Image profile = new Image("\""+new_photo+"\"");
+        // ImageView profileView = new ImageView(profile);
+        // profileView.setFitHeight(150);
+        // profileView.setPreserveRatio(true);
     }
 }

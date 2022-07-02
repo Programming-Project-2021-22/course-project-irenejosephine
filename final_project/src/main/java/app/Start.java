@@ -9,10 +9,10 @@ import javafx.stage.Stage;
  * @author Josephine Sacchetto
  */
 public class Start extends Application{
-	App newApp = new App();
+	App application = new App();
 
     public void start(Stage primaryStage){
-        Scene scene = new Scene(new LoginPane(newApp), 800, 600);
+        Scene scene = new Scene(new LoginPane(application), 800, 600);
         primaryStage.setTitle("Login Page");
         primaryStage.setScene(scene);
         primaryStage.show();
