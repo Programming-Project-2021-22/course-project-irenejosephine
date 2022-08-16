@@ -97,7 +97,7 @@ Elaborate on the main challenges each group member faced throughout the project 
 Describe what you learned with this project.
 
 - **Irene Avezzù** I learned a new library called `xyz`!
-- **Josephine Sacchetto:** I learned how to implement the design pattern `abc`
+- **Josephine Sacchetto:** I learned how to implement the design pattern. `abc`
 
 
 
