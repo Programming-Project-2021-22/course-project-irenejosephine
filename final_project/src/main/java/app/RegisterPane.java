@@ -128,7 +128,7 @@ public class RegisterPane extends GridPane{
         }
 
 
-        if (isUserValid(set_username) && isPswValid(set_password) && isEmailValid(set_email) && isPhoneValid(set_phone)){   ////da vedere come fare
+        if (isUserValid(set_username) && isPswValid(set_password) && isEmailValid(set_email) && isPhoneValid(set_phone)){
             if (accountExist(set_username)){ //if the username already exists the user an alert is generated
                 Alert alert = new Alert(AlertType.WARNING);
                 alert.setTitle("Warning");

@@ -60,7 +60,7 @@ public class ProfilePane extends HBox {
         logo.setOnMouseClicked(this::logoEvent);//MouseEvent e)
 
         //profile image
-        profile = new Image(getApplication().getWardrobe(index).getPicture());
+        profile = new Image(getApplication().getWardrobe(getIndex()).getPicture());
         profileView = new ImageView(profile);
         profileView.setFitHeight(150);
         profileView.setPreserveRatio(true);
@@ -68,11 +68,11 @@ public class ProfilePane extends HBox {
         font = new Font("Times New Roman",24);
 
         //insert in the fields what the user had entered when they registered
-        inputUsername = new TextField(getApplication().getWardrobe(index).getUsername());
-        inputPassword = new TextField(getApplication().getWardrobe(index).getPassword());
-        inputEmail = new TextField(getApplication().getWardrobe(index).getEmail());
-        inputPhone = new TextField(getApplication().getWardrobe(index).getPhone());
-        inputDescription = new TextArea(getApplication().getWardrobe(index).getDescription());
+        inputUsername = new TextField(getApplication().getWardrobe(getIndex()).getUsername());
+        inputPassword = new TextField(getApplication().getWardrobe(getIndex()).getPassword());
+        inputEmail = new TextField(getApplication().getWardrobe(getIndex()).getEmail());
+        inputPhone = new TextField(getApplication().getWardrobe(getIndex()).getPhone());
+        inputDescription = new TextArea(getApplication().getWardrobe(getIndex()).getDescription());
         inputPath = new TextField();
 
         path = new Label("Insert the path of the profile photo:");
@@ -161,7 +161,7 @@ public class ProfilePane extends HBox {
      * @param event
      */
     public void removeAccountEvent(ActionEvent event){
-        getApplication().removeUser(index);
+        getApplication().removeUser(getIndex());
         updateApp();
         Stage stage = (Stage) removeAccount.getScene().getWindow();
         stage.close();
@@ -237,13 +237,13 @@ public class ProfilePane extends HBox {
         }
 
         if (isUserValid(set_username) && isPswValid(set_password) && isEmailValid(set_email)&& isPhoneValid(set_phone) && isPictureValid(set_photo)){
-            getApplication().getWardrobe(index).setUsername(set_username);
-            getApplication().getWardrobe(index).setPassword(set_password);
-            getApplication().getWardrobe(index).setEmail(set_email);
-            getApplication().getWardrobe(index).setPhone(set_phone);
-            getApplication().getWardrobe(index).setDescription(set_description);
+            getApplication().getWardrobe(getIndex()).setUsername(set_username);
+            getApplication().getWardrobe(getIndex()).setPassword(set_password);
+            getApplication().getWardrobe(getIndex()).setEmail(set_email);
+            getApplication().getWardrobe(getIndex()).setPhone(set_phone);
+            getApplication().getWardrobe(getIndex()).setDescription(set_description);
             if (inputPath.getText() != ""){
-                getApplication().getWardrobe(index).setPicture(set_photo);
+                getApplication().getWardrobe(getIndex()).setPicture(set_photo);
             }
 
             updateApp();
@@ -251,7 +251,7 @@ public class ProfilePane extends HBox {
             Stage stage = (Stage) done.getScene().getWindow();
             stage.close();
             Stage stage2 = new Stage();
-            Scene scene = new Scene(new ProfilePane(getApplication(), index), 800, 600);
+            Scene scene = new Scene(new ProfilePane(getApplication(), getIndex()), 800, 600);
             stage2.setTitle("Profile");
             stage2.setScene(scene);
             stage2.show();

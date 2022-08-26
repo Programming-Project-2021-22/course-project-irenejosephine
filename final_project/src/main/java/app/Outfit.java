@@ -2,6 +2,10 @@ package app;
 
 import java.util.ArrayList;
 
+/**
+ * The app.Outfits class represent an outfit.
+ * @author Irene Avezzù
+ */
 public class Outfit {
     private String  description, picture, description2;
     private int id =0;
@@ -9,7 +13,15 @@ public class Outfit {
     private Seasons seasonOfOutfit;
     private Occasions occasionOfOutfit;
 
-    //constructor
+    /**
+     * Constructor form file json
+     * @param id
+     * @param description
+     * @param picture
+     * @param description2
+     * @param selectedOccasion
+     * @param selectedSeason
+     */
     public Outfit(int id, String picture, String description, String selectedSeason, String selectedOccasion, String description2) {
         setId(id);
         this.picture = picture;
@@ -19,10 +31,17 @@ public class Outfit {
         this.description2=description2;
     }
 
-    //getter and setters
+    /**
+     * getter of SeasonOfOutfit
+     *
+     */
     public Seasons getSeasonOfOutfit() {
         return seasonOfOutfit;
     }
+    /**
+     * setter of SeasonOfOutfit
+     *
+     */
     public void setSeasonOfOutfit(String selectedSeason) {
     	selectedSeason = selectedSeason.toLowerCase();
     	switch (selectedSeason) {
@@ -45,9 +64,17 @@ public class Outfit {
         }
     }
 
+    /**
+     * getter of OccasionOfOutfit
+     *
+     */
     public Occasions getOccasionOfOutfit() {
         return occasionOfOutfit;
     }
+    /**
+     * getter of OccasionOfOutfit
+     *
+     */
     public void setOccasionOfOutfit(String selectedOccasion) {
     	selectedOccasion = selectedOccasion.toLowerCase();
     	switch (selectedOccasion) {
@@ -70,32 +97,63 @@ public class Outfit {
     	}
     }
 
+    /**
+     * getter of id
+     *
+     */
     public int getId(){
         return id;
     }
+    /**
+     * setter of id
+     *
+     */
     public void setId(int id){
         this.id = id;
     }
 
+    /**
+     * getter of picture
+     *
+     */
     public String getPicture(){
         return picture;
     }
+    /**
+     * setter of picture
+     *
+     */
     public void setPicture(String picture){
         this.picture = picture;
     }
 
+    /**
+     * getter of description
+     *
+     */
     public String getDescription (){
         return description;
     }
+    /**
+     * setter of description
+     *
+     */
     public void setDescription (String description) {
         this.description = description;
     }
 
-    //Add a new item to the outfit
+    /**
+     * Add a new item to the outfit
+     * @param newItem
+     */
     public void addItem(Item newItem){
         items.add(newItem);
     }
 
+    /**
+     * Override to String
+     *
+     */
     public String toString (){
         String itemsDescriptions = "";
         for (int i=0; i<items.size(); i++){

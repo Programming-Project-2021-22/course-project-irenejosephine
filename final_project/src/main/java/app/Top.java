@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /**
  * The app.Top class represent a app.Top item.
- * It extends the app.Item abstract class and its methods but implement an additional instance data typeofTop
+ * It extends the app.Item class and its methods but implement an additional instance data typeofTop
  * @author Irene Avezzù
 */
 
@@ -83,7 +83,7 @@ public class Top extends Item{
         String s="";
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(path)); //"src\\main\\resources\\json\\app.json"));
+            BufferedReader reader = new BufferedReader(new FileReader(path));
             String line = reader.readLine();
             while (line!=null){
                 s= s + line;

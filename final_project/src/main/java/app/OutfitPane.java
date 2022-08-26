@@ -36,7 +36,7 @@ public class OutfitPane extends HBox {
     private Font font;
     private Label title, occasionLabel, seasonLabel, filterLabel;
     private MenuBar mb;
-    private Menu allitems, tops, bottoms, dresses, accessories, occasions, seasons, favorites, outfits;
+    private Menu allitems, tops, bottoms, dresses, accessories, favorites, outfits;
     private MenuItem all; //all
     private MenuItem alltops,tShirt, sweater, sweatshirtAndHoodie, topAndBody, jacketAndCoat, tankTop; //tops
     private MenuItem allbottoms,skirt, jeans, trouser, shorts; //bottoms
@@ -500,130 +500,6 @@ public class OutfitPane extends HBox {
         }
         return listToReturn;
     }
-
-
-    //TODO REMOVE
-    /**
-     * Generates the six buttons to be displayed
-     * @param items
-     * @param i
-     * @return
-     */
-    /*public Button[] createCard (ArrayList <Outfit> items , int i){
-        Button buttons [] = new Button[6];
-        displayedOutfits = selectItem(items, i);
-
-        if (displayedOutfits.size()!=0){
-            if (displayedOutfits.size()==6){//if there are six items to display
-                int x = items.size()-((getInternIndex()/6)+1);
-                if(x>=6){
-                    next.setVisible(true);
-                }
-                for(int g=0; g<6; g++){
-                    Image img = new Image(displayedOutfits.get(g).getPicture());
-                    ImageView view = new ImageView(img);
-                    view.setFitHeight(160);
-                    view.setFitWidth(160);
-                    view.setPreserveRatio(true);
-
-                    Button card = new Button();
-                    card.setPrefSize(180, 180);
-                    card.setGraphic(view);
-
-                    buttons[g]=card;
-                }
-                buttons[0].setOnAction(this::popUpEvent1);
-                buttons[1].setOnAction(this::popUpEvent2);
-                buttons[2].setOnAction(this::popUpEvent3);
-                buttons[3].setOnAction(this::popUpEvent4);
-                buttons[4].setOnAction(this::popUpEvent5);
-                buttons[5].setOnAction(this::popUpEvent6);
-            }else{//if there are less than six items to display
-                next.setVisible(false);
-                for(int g = 0; g<(displayedOutfits.size()); g++){ //create enough buttons for the available item
-                    Image img = new Image(displayedOutfits.get(g).getPicture());
-                    ImageView view = new ImageView(img);
-                    view.setFitHeight(160);
-                    view.setFitWidth(160);
-                    view.setPreserveRatio(true);
-
-                    Button card = new Button();
-                    card.setPrefSize(180, 180);
-                    card.setGraphic(view);
-
-                    buttons[g]=card;
-                }
-
-                switch(displayedOutfits.size()){
-                    case 1:{
-                        buttons[0].setOnAction(this::popUpEvent1);
-                        break;
-                    }
-                    case 2:{
-                        buttons[0].setOnAction(this::popUpEvent1);
-                        buttons[1].setOnAction(this::popUpEvent2);
-                        break;
-                    }
-                    case 3:{
-                        buttons[0].setOnAction(this::popUpEvent1);
-                        buttons[1].setOnAction(this::popUpEvent2);
-                        buttons[2].setOnAction(this::popUpEvent3);
-                        break;
-                    }
-                    case 4:{
-                        buttons[0].setOnAction(this::popUpEvent1);
-                        buttons[1].setOnAction(this::popUpEvent2);
-                        buttons[2].setOnAction(this::popUpEvent3);
-                        buttons[3].setOnAction(this::popUpEvent4);
-                        break;
-                    }
-                    case 5:{
-                        buttons[0].setOnAction(this::popUpEvent1);
-                        buttons[1].setOnAction(this::popUpEvent2);
-                        buttons[2].setOnAction(this::popUpEvent3);
-                        buttons[3].setOnAction(this::popUpEvent4);
-                        buttons[4].setOnAction(this::popUpEvent5);
-                        break;
-                    }
-                }
-                for(int h = (displayedOutfits.size()); h<6; h++){ //creates empty cards necessary to have a total of 6 cards
-                    Button card = new Button();
-                    card.setPrefSize(180, 180);
-
-                    buttons[h]=card;
-                }
-            }
-        }
-
-        if (i==0){
-            previous.setVisible(false);
-        }
-
-        return buttons;
-    }
-
-    /**
-     * Support method for createCard , Selects  6 or fewer items to be displayed
-     * @param items
-     * @param i
-     * @return six or less selected items to be displayed
-     * @Author Irene
-     */
-    /*public ArrayList <Outfit> selectItem(ArrayList <Outfit> items, int i){
-        ArrayList <Outfit> listToReturn = new ArrayList<Outfit>();
-        if ((items.size()-i)>=6){
-            for (int g=0; g<6; g++){
-                listToReturn.add(outfitToDisplay.get(i+g));
-            }
-        }else{
-            for (int g=0; g<(items.size()-i); g++){
-                listToReturn.add(outfitToDisplay.get(i+g));
-            }
-        }
-        return listToReturn;
-    }
-*/
-
 
     /**
      * Event handler for when the logo image is clicked.

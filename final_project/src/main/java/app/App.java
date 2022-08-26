@@ -60,21 +60,6 @@ public class App {
     }
 
     /**
-     * Check if the password and the username exist
-     * @param userName
-     * @return a boolean value: true -> the username exists
-     * fales->the username doesn't exist
-     */
-    public boolean checkUsr (String userName){
-        if (users.contains(userName)) { //username exists
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
-    /**
      * Check if the password and the username exist and are correct
      * @param userName
      * @param password

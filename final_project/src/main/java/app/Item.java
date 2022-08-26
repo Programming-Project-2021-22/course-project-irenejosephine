@@ -40,12 +40,6 @@ public class Item<T> {
     }
 
     /**
-     * Abstract constructor from a file (json -> with deserialization)
-     * @param filename
-     */
-    public Item(String filename){}
-
-    /**
      * Getter of seasonOfItem
      * @return seasonOfItem
      */

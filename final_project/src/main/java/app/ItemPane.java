@@ -43,7 +43,7 @@ public class ItemPane extends HBox {
     private Font font;
     private Label title, occasionLabel, colorLabel, seasonLabel, filterLabel;
     private MenuBar mb;
-    private Menu allitems, tops, bottoms, dresses, accessories, occasions, seasons, favorites, outfits;
+    private Menu allitems, tops, bottoms, dresses, accessories, favorites, outfits;
     private MenuItem all; //all
     private MenuItem alltops,tShirt, sweater, sweatshirtAndHoodie, topAndBody, jacketAndCoat, tankTop; //tops
     private MenuItem allbottoms,skirt, jeans, trouser, shorts; //bottoms
@@ -53,8 +53,6 @@ public class ItemPane extends HBox {
     private MenuItem allOutfits;
     private Button add, apply, next, previous;
     private ImageView profile, logo;
-
-    private Image backgroud;
     private ButtonType ok;  //Dialoge box
     private ButtonType delete;  //Dialoge box
     private HBox menu, label, filters, cardsr1, cardsr2;
@@ -717,7 +715,6 @@ public class ItemPane extends HBox {
      * Shows the items based on which filters were chose
      * @param actionEvent
      */
-    //se premuto deve far vedere gli items in base ai filtri
     private void applyEvent(ActionEvent actionEvent) {
         int x = 0;
         tf=true;
@@ -764,10 +761,6 @@ public class ItemPane extends HBox {
                         (String) colorsFilter.getValue(),
                         (String) seasonsFilter.getValue()
                     );
-                    System.out.println("COLOR " + colorsFilter.getValue() + " e SEASON: " + seasonsFilter.getValue());
-                    for (int i = 0; i<filteredItemToDisplay.size(); i++){
-                        System.out.println(filteredItemToDisplay.get(i));
-                    }
                 }
                 else{
                     //color filters is != null

@@ -183,27 +183,12 @@ public class Wardrobe <T extends Item>{
     }
 
     /**
-     * Remove the index-th item from the ArrayList of items
-     * @param index index of element to remove
-     */
-    public void removeItem (int index) {
-        items.remove(index);
-    }
-
-    /**
      * Add a new app.Outfit object to the ArrayList of outfits
      * @param newOutfit
      */
     public void addOutfit (Outfit newOutfit) {
         outfits.add(newOutfit);
         setOutfitId();
-    }
-    /**
-     * Remove the index-th outfit from the ArrayList of outfits
-     * @param index index of element to remove
-     */
-    public void removeOutfit (int index) {
-        outfits.remove(index);
     }
 
     /**

@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /**
  * The app.Dress class represent an accessory item.
- * It extends the app.Item abstract class and its methods but implement an additional instance data typeOfAccessorize
+ * It extends the app.Item class and its methods but implement an additional instance data typeOfAccessorize
  * @author Irene Avezzù
  */
 
@@ -84,7 +84,7 @@ public class Dress extends Item{
         String s="";
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(path)); //"src\\main\\resources\\json\\app.json"));
+            BufferedReader reader = new BufferedReader(new FileReader(path));
             String line = reader.readLine();
             while (line!=null){
                 s= s + line;

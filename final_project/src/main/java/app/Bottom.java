@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /**
  * The app.Bottom class represent an accessory item.
- * It extends the app.Item abstract class and its methods  but implement an additional instance data typeOfBottom
+ * It extends the app.Item class and its methods  but implement an additional instance data typeOfBottom
  * @author Irene Avezzù
 */
 
@@ -46,7 +46,6 @@ public class Bottom extends Item {
     public void createFromFile(String filename) {
         String sB, sS, sO, sC, sT, f, pFN, d;
         int id;
-        Scanner file;
         Gson gson;
         Bottom b1;
 
@@ -85,7 +84,7 @@ public class Bottom extends Item {
         String s="";
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(path)); //"src\\main\\resources\\json\\app.json"));
+            BufferedReader reader = new BufferedReader(new FileReader(path));
             String line = reader.readLine();
             while (line!=null){
                 s= s + line;
