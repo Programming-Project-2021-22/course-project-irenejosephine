@@ -114,7 +114,7 @@ List and explain how you used the 10 programming techniques required for this pr
 
 ### 4.4. Tests
 
-To assert all action of our application warkes in the correct way we worked on both white-box testing and black-box testing. To make sure the application worked we asked some of our friends (both computer scienze experts and non-experts) to develop the black-box testing suites to test it and based on their feedbacks we fixed the portion of the code that were not functioning in the correct way.
+To assert all action of our application warkes in the correct way we worked on both white-box testing and black-box testing. To make sure the application worked we asked the help of some of our friends (both computer scienze experts and non-experts) to develop the black-box testing suites to test it and based on their feedbacks we fixed the portion of the code that were not functioning in the correct way. The GUI was tested from us and from other people to make sure a comlete test suit was create.
 
 ## 5. Experience
 
@@ -142,9 +142,6 @@ Elaborate on the main challenges each group member faced throughout the project 
 
 Describe what you learned with this project.
 
-- **Irene Avezzù** I learned with Gson developing serializaion and deserialization method. I also learned that connecting back and frontend take much longer than i expected
+- **Irene Avezzù** I learned with Gson developing serializaion and deserialization method. I also learned that connecting back and frontend take much longer than i expected.
 - **Josephine Sacchetto:** I learned how to implement the design pattern and that without communication among those working on the same project, one cannot proceed effectively and efficiently toward the result. 
-
-
-
 
