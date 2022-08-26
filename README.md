@@ -104,11 +104,7 @@ List and explain how you used the 10 programming techniques required for this pr
 7.   **Serialization:** we used serialization to simulate a database, the application is saved in a json file and reload everytime the app is open
 8.   **Deserialization:** we used deserialization to allow our application to creates items objects from a json file and to load the application from its json file used to simulate a database
 9.   **Varargs:** we used Varargs in the Wardrobe class in its search method because in some case we pass only one parameter to filter but in other cases we pass multiples string 
-10.  **Generic classes:** ??
-11.  **Custom exceptions:** ??
-
-**Abstract classes: abstract classes were used in the realization of the Item class wich represent a general item but no item that is not a top/bottom/accesorize can be created**
-
+10.  **Custom exceptions:** we used custom exceptions to handle problems in the loginPane, registerPane, addItemPane and addOutifitPane
 
 ### 4.4. Tests
 
