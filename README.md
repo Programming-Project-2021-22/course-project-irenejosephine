@@ -43,6 +43,21 @@ We divided our idea in blocks structuring our application in classes.
 FRONT-END:
 The Start class represents the starting point for our application, it creates and item of LoginPane which, based on the user actions, can lead to a RegisterPane (where the user can create a new account and then being rediected to the LoginPane) or the HomePane. The HomePane allows the user to filter the items (ItemPane), add new items/outfits (AddPane, AddOutfitPane, AddItemPane) or go to its Profile (ProfilePane).
 
+```mermaid
+graph TD;
+  Start-->LoginPane;
+  LoginPane-->RegistrationPane;
+  Registration-->LoginPane;
+  LoginPane-->HomePane;
+  HomePane-->ItemPane;
+  HomePane-->AddPane;
+  AddPane-->AddOutfitPane;
+  AddPane-->AddItemPane;
+  HomePane-->ProfilePane;
+  ProfilePane-->HomePane;
+  ProfilePane-->LoginPane;
+```
+
 BACK-END:
 The Item class represent the base element for the wardrobe. Top, Bottom, Dress and Accessorieze exteds it.
 The Wardrobe class simulates a user wardrobes, contains a collection of items and outfits.
