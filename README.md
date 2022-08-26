@@ -92,9 +92,9 @@ graph TD;
   Wardrobe3-->outfits3;
 ```
 
-### 4.2. Third-Party Libraries
+### 4.2. Libraries
 
-We did not use third party libraries.
+We used GSON to develop serialization and deserialization of objects and JavaFX to develop the GUI.
 
 ### 4.3. Programming Techniques
 
