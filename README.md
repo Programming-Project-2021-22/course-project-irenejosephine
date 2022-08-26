@@ -7,7 +7,7 @@ The menu bar on the top help to navigate the app, in addition the filters of the
 
 ### 1.1. Demo
 
-Project presntation: https://youtu.be/JO-LADywFp4
+Project presentation: https://youtu.be/JO-LADywFp4
 
 ## 2. Authors
 
