@@ -76,9 +76,16 @@ graph TD;
 The App class is a collection of wardrobes, it provides method that support the connection to the GUI.
 ```mermaid
 graph TD;
-  App-->Wardrobe;
-  Wardrobe-->items;
-  Wardrobe-->outfits;
+  App-->Wardrobes;
+  Wardrobes-->Wardrobe1;
+  Wardrobes-->Wardrobe2;
+  Wardrobes-->Wardrobe3;
+  Wardrobe1-->items1;
+  Wardrobe1-->outfits1;
+  Wardrobe2-->items2;
+  Wardrobe2-->outfits2;
+  Wardrobe3-->items3;
+  Wardrobe3-->outfits3;
 ```
 
 ### 4.2. Third-Party Libraries
