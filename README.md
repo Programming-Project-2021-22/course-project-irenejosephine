@@ -14,7 +14,7 @@ Add a link to a demo of your project.
 This project was created by:
 
 * Avezzù Irene
-* Sacchetto Josephine
+* Sacchetto Joséphine
 
 ## 3. Usage
 
@@ -138,14 +138,14 @@ Description of the roles and responsibilities that each member had in this proje
 Elaborate on the main challenges each group member faced throughout the project and how they were surpassed.
 
 - **Irene Avezzù:** The most difficult aspect in this project for me was to implement the test suits because I still struggle in the creation of a complete suit of test.
-- **Josephine Sacchetto:** The most difficult aspect in this project for me was to implement xxx. The reason was X so I had to do Y and I achived Z.
+- **Josephine Sacchetto:** The most difficult thing for me was the organization of time. The reason was that I had no clear plan to follow so I had to stop and create a detailed plan with day/week/month goals to work toward. By doing this I was able to work better.
 
 ### 5.4. Learning Outcomes
 
 Describe what you learned with this project.
 
 - **Irene Avezzù** I learned with Gson developing serializaion and deserialization method.
-- **Josephine Sacchetto:** I learned how to implement the design pattern. `abc`
+- **Josephine Sacchetto:** I learned how to implement the design pattern and that without communication among those working on the same project, one cannot proceed effectively and efficiently toward the result. 
 
 
 
