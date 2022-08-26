@@ -56,6 +56,10 @@ graph TD;
   HomePane-->ProfilePane;
   ProfilePane-->HomePane;
   ProfilePane-->LoginPane;
+  ItemPane-->AddPane;
+  ItemPane-->HomePane;
+  ItemPane-->PrifilePane;
+  
 ```
 
 BACK-END:
