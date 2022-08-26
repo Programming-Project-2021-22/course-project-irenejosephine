@@ -34,8 +34,6 @@ mvn abc
 
 ## 4. Implementation
 
-...
-
 ### 4.1. Architectural Overview
 
 We divided our idea in blocks structuring our application in classes.
