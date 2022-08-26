@@ -47,7 +47,7 @@ The Start class represents the starting point for our application, it creates an
 graph TD;
   Start-->LoginPane;
   LoginPane-->RegistrationPane;
-  Registration-->LoginPane;
+  RegistrationPane-->LoginPane;
   LoginPane-->HomePane;
   HomePane-->ItemPane;
   HomePane-->AddPane;
@@ -60,8 +60,26 @@ graph TD;
 
 BACK-END:
 The Item class represent the base element for the wardrobe. Top, Bottom, Dress and Accessorieze exteds it.
+```mermaid
+graph TD;
+  Item-->Top;
+  Item-->Bottom;
+  Item-->Dress;
+  Item-->Accessorieze;
+```
 The Wardrobe class simulates a user wardrobes, contains a collection of items and outfits.
+```mermaid
+graph TD;
+  Wardrobe-->items;
+  Wardrobe-->outfits;
+```
 The App class is a collection of wardrobes, it provides method that support the connection to the GUI.
+```mermaid
+graph TD;
+  App-->Wardrobe;
+  Wardrobe-->items;
+  Wardrobe-->outfits;
+```
 
 ### 4.2. Third-Party Libraries
 
