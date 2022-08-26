@@ -103,7 +103,7 @@ List and explain how you used the 10 programming techniques required for this pr
 6.   **Overloading:** we used multiple constructor for the Item obj based on which parameters were passed
 7.   **Serialization:** we used serialization to simulate a database, the application is saved in a json file and reload everytime the app is open
 8.   **Deserialization:** we used deserialization to allow our application to creates items objects from a json file and to load the application from its json file used to simulate a database
-9.   **Varargs:** in AppPannel (per caricare gli oggetti)??
+9.   **Varargs:** we used Varargs in the Wardrobe class in its search method because in some case we pass only one parameter to filter but in other cases we pass multiples string 
 10.  **Generic classes:** ??
 11.  **Custom exceptions:** ??
 
