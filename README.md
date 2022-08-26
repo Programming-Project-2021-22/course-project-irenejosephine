@@ -58,7 +58,7 @@ graph TD;
   ProfilePane-->LoginPane;
   ItemPane-->AddPane;
   ItemPane-->HomePane;
-  ItemPane-->PrifilePane;
+  ItemPane-->ProfilePane;
   
 ```
 
