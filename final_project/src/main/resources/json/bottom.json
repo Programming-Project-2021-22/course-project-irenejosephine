@@ -1,7 +1,1 @@
-{"typeOfBottom":"trouser",
-    "seasonOfItem":"summer",
-    "occasionOfItem":"semiformal",
-    "colorOfItem":"Blue",
-    "favourite":false,
-    "description":"blue trouser",
-    "picture":"trouser.jpg"}
+{"typeOfBottom":"skirt","seasonOfItem":"winter","occasionOfItem":"everyDay","colorOfItem":"Red","favourite":true,"description":"blue trouser","picture":"images/skirt.png","type":"bottom","typeOf":"skirt","id":4}

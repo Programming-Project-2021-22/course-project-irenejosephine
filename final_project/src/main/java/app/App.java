@@ -8,14 +8,18 @@ import java.util.ArrayList;
  * @author Irene Avezzù
  */
 public class App {
-    private static ArrayList <Wardrobe> wardrobes = new ArrayList<>();
-    private static ArrayList <String> users = new ArrayList<>();
-    private static ArrayList <String> passwords = new ArrayList<>();
+    private ArrayList <Wardrobe> wardrobes = new ArrayList<>();
+    private ArrayList <String> users = new ArrayList<>();
+    private ArrayList <String> passwords = new ArrayList<>();
 
     /**
      * Constructor: initialize the object
      */
-    public App () {}
+    public App() {
+        this.wardrobes = new ArrayList<>();
+        this.users = new ArrayList<>();
+        this.passwords = new ArrayList<>();
+    }
 
     /**
      * Check if the user of name userName exists
@@ -109,4 +113,19 @@ public class App {
     	users.remove(index);
     	passwords.remove(index);
     }
+
+    /**
+     * Add a new wardrobe from a Wardrobe object
+     * @param w
+     */
+    public void addWardrobe(Wardrobe w){
+        users.add(w.getUsername());
+        passwords.add(w.getPassword());
+        wardrobes.add(w);
+    }
+
+    public ArrayList<Wardrobe> getWardarobes(){
+        return wardrobes;
+    }
+
 }

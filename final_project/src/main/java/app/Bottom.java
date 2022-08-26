@@ -2,8 +2,7 @@ package app;
 
 import com.google.gson.Gson;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -25,8 +24,8 @@ public class Bottom extends Item {
      * @param filename
      * @param description
      */
-    public Bottom (String selectedSeason, String selectedOccasion, String selectedColor, String selectedType, String favourite, String filename, String description) {
-    	super(selectedSeason, selectedOccasion, selectedColor, favourite, filename, description);
+    public Bottom (String selectedSeason, String selectedOccasion, String selectedColor, String selectedType, String favourite, String filename, String description, int id) {
+        super(selectedSeason, selectedOccasion, selectedColor, favourite, filename, description, "bottom", id, selectedType);
     	setTypeOfBottom(selectedType);
     }
 
@@ -35,7 +34,7 @@ public class Bottom extends Item {
      * @param filename
      */
     public Bottom(String filename) {
-        super("winter", "formal", "red", "yes", "", "");
+        super("winter", "formal", "red", "yes", "", "", "bottom", 0, "jeans");
         setTypeOfBottom("jeans");
         createFromFile(filename);
     }
@@ -46,31 +45,58 @@ public class Bottom extends Item {
      */
     public void createFromFile(String filename) {
         String sB, sS, sO, sC, sT, f, pFN, d;
+        int id;
         Scanner file;
         Gson gson;
         Bottom b1;
 
+        //read string from file
+        sB=readFile(filename);
+
+        //convert the string into an app.Accessorize object
+        gson = new Gson ();
+        b1 = gson.fromJson(sB, Bottom.class);
+
+        // once the obj is created from the json file its value are assigned to the current object
+        sS=b1.getSeasonOfItem().name();
+        sO=b1.getOccasionOfItem().name();
+        sC=b1.getColorOfItem().name();
+        sT=b1.getTypeOfBottom().name();
+        f=((b1.getFavourite())==true ? "yes" : "no");
+        pFN=b1.getPicture();
+        d=b1.getDescription();
+        id= b1.getId();
+
+        setSeasonOfItem(sS);
+        setOccasionOfItem(sO);
+        setColorOfItem(sC);
+        setPicture (pFN);
+        setFavourite(f);
+        setDescription(d);
+        setTypeOfBottom(sT);
+        setId(id);
+        setTypeOf(sT);
+    }
+
+    /**
+     * Support method for createFromFile, convert the context of a file into a string
+     */
+    public String readFile (String path){
+        String s="";
+
         try {
-            //read string from file
-            file = new Scanner(new File(filename));
-            sB = file.nextLine();
-            sB.replace("\"", "'");
-
-            //convert the string into an app.Accessorize object
-            gson = new Gson ();
-            b1 = gson.fromJson(sB, Bottom.class);
-
-            // once the obj is created from the json file its value are assigned to the current object
-            sS=b1.getSeasonOfItem().name();
-            sO=b1.getOccasionOfItem().name();
-            sC=b1.getColorOfItem().name();
-            sT=b1.getTypeOfBottom().name();
-            f=((b1.getFavourite())==true ? "yes" : "no");
-            pFN=b1.getPicture();
-            d=b1.getDescription();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            BufferedReader reader = new BufferedReader(new FileReader(path)); //"src\\main\\resources\\json\\app.json"));
+            String line = reader.readLine();
+            while (line!=null){
+                s= s + line;
+                line=reader.readLine();
+            }
+            reader.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+
+        return s;
     }
 
     /**
@@ -112,7 +138,7 @@ public class Bottom extends Item {
     @Override
     public String toString (){
         return ("Type of bottom: " + getTypeOfBottom() +
-        "\nDescription:" + getDescription() +
+        "\nDescription: " + getDescription() +
 		"\nColor: " + getColorOfItem() +
 		"\nSeason: "  + getSeasonOfItem() +
 		"\nOccasion: " + getOccasionOfItem() );

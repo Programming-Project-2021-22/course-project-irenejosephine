@@ -2,8 +2,7 @@ package app;
 
 import com.google.gson.Gson;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -24,8 +23,8 @@ public class Dress extends Item{
      * @param filename
      * @param description
      */
-    public Dress (String selectedSeason, String selectedOccasion, String selectedColor, String selectedType, String favourite, String filename, String description) {
-    	super(selectedSeason, selectedOccasion, selectedColor, favourite, filename, description);
+    public Dress (String selectedSeason, String selectedOccasion, String selectedColor, String selectedType, String favourite, String filename, String description, int id) {
+        super(selectedSeason, selectedOccasion, selectedColor, favourite, filename, description, "dress", id, selectedType);
     	setTypeOfDress(selectedType);
     }
 
@@ -34,7 +33,7 @@ public class Dress extends Item{
      * @param filename
      */
     public Dress(String filename) {
-        super("winter", "formal", "red", "yes", "", "");
+        super("winter", "formal", "red", "yes", "", "", "dress", 0, "longs");
         setTypeOfDress("longs");
         createFromFile(filename);
     }
@@ -45,31 +44,58 @@ public class Dress extends Item{
      */
     public void createFromFile(String filename) {
         String sD, sS, sO, sC, sT, f, pFN, d;
+        int id;
         Scanner file;
         Gson gson;
         Dress d1;
 
+        //read string from file
+        sD = readFile(filename);
+
+        //convert the string into an app.Accessorize object
+        gson = new Gson ();
+        d1 = gson.fromJson(sD, Dress.class);
+
+        // once the obj is created from the json file its value are assigned to the current object
+        sS=d1.getSeasonOfItem().name();
+        sO=d1.getOccasionOfItem().name();
+        sC=d1.getColorOfItem().name();
+        sT=d1.getTypeOfDress().name();
+        f=((d1.getFavourite())==true ? "yes" : "no");
+        pFN=d1.getPicture();
+        d=d1.getDescription();
+        id= d1.getId();
+
+        setSeasonOfItem(sS);
+        setOccasionOfItem(sO);
+        setColorOfItem(sC);
+        setPicture (pFN);
+        setFavourite(f);
+        setDescription(d);
+        setTypeOfDress(sT);
+        setId(id);
+        setTypeOf(sT);
+    }
+
+    /**
+     * Support method for createFromFile, convert the context of a file into a string
+     */
+    public String readFile (String path){
+        String s="";
+
         try {
-            //read string from file
-            file = new Scanner(new File(filename));
-            sD = file.nextLine();
-            sD.replace("\"", "'");
-
-            //convert the string into an app.Accessorize object
-            gson = new Gson ();
-            d1 = gson.fromJson(sD, Dress.class);
-
-            // once the obj is created from the json file its value are assigned to the current object
-            sS=d1.getSeasonOfItem().name();
-            sO=d1.getOccasionOfItem().name();
-            sC=d1.getColorOfItem().name();
-            sT=d1.getTypeOfDress().name();
-            f=((d1.getFavourite())==true ? "yes" : "no");
-            pFN=d1.getPicture();
-            d=d1.getDescription();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            BufferedReader reader = new BufferedReader(new FileReader(path)); //"src\\main\\resources\\json\\app.json"));
+            String line = reader.readLine();
+            while (line!=null){
+                s= s + line;
+                line=reader.readLine();
+            }
+            reader.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+
+        return s;
     }
 
     /**
@@ -102,7 +128,7 @@ public class Dress extends Item{
     @Override
     public String toString (){
         return ("Type of dress: " + getTypeOfDress() +
-        "\nDescription:" + getDescription() +
+        "\nDescription: " + getDescription() +
 		"\nColor: " + getColorOfItem() +
 		"\nSeason: "  + getSeasonOfItem() +
 		"\nOccasion: " + getOccasionOfItem() );

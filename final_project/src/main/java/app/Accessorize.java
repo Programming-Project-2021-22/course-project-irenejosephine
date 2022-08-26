@@ -1,7 +1,6 @@
 package app;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
 
 import com.google.gson.Gson;
@@ -27,8 +26,8 @@ public class Accessorize extends Item {
      * @param filename
      * @param description
      */
-    public Accessorize(String selectedSeason, String selectedOccasion, String selectedColor, String selectedType, String favourite, String filename, String description ) {
-        super(selectedSeason, selectedOccasion, selectedColor, favourite, filename, description);
+    public Accessorize(String selectedSeason, String selectedOccasion, String selectedColor, String selectedType, String favourite, String filename, String description, int id) {
+        super(selectedSeason, selectedOccasion, selectedColor, favourite, filename, description, "accessorize", id, selectedType);
         setTypeOfAccesorize(selectedType);
     }
 
@@ -37,9 +36,8 @@ public class Accessorize extends Item {
      * @param filename
      */
     public Accessorize(String filename) {
-        super("winter", "formal", "red", "yes", "", "");
+        super("winter", "formal", "red", "yes", "", "", "accessorize", 0, "glasses");
         setTypeOfAccesorize("glasses");
-
         createFromFile(filename);
    }
 
@@ -48,32 +46,58 @@ public class Accessorize extends Item {
      * @param filename: json file
      */
     public void createFromFile(String filename) {
-        String sA, sS, sO, sC, sT, f, pFN, d;
+        String sA, sS, sO, sC, sT, f, pFN, d, sTO;
+        int id;
         Scanner file;
         Gson gson;
         Accessorize a1;
 
+        //read string from file
+        sA = readFile(filename);
+
+        //convert the string into an app.Accessorize object
+        gson = new Gson ();
+        a1 = gson.fromJson(sA, Accessorize.class);
+
+        // once the obj is created from the json file its value are assigned to the current object
+        sS=a1.getSeasonOfItem().name();
+        sO=a1.getOccasionOfItem().name();
+        sC=a1.getColorOfItem().name();
+        sT=a1.getTypeOfAccesorize().name();
+        f=((a1.getFavourite())==true ? "yes" : "no");
+        pFN=a1.getPicture();
+        d=a1.getDescription();
+        id= a1.getId();
+
+        setSeasonOfItem(sS);
+        setOccasionOfItem(sO);
+        setColorOfItem(sC);
+        setPicture (pFN);
+        setFavourite(f);
+        setDescription(d);
+        setTypeOfAccesorize(sT);
+        setId(id);
+        setTypeOf(sT);
+    }
+    /**
+     * Support method for createFromFile, convert the context of a file into a string
+     */
+    public String readFile (String path){
+        String s="";
+
         try {
-            //read string from file
-             file = new Scanner(new File(filename));
-            sA = file.nextLine();
-            sA.replace("\"", "'");
-
-            //convert the string into an app.Accessorize object
-            gson = new Gson ();
-            a1 = gson.fromJson(sA, Accessorize.class);
-
-            // once the obj is created from the json file its value are assigned to the current object
-            sS=a1.getSeasonOfItem().name();
-            sO=a1.getOccasionOfItem().name();
-            sC=a1.getColorOfItem().name();
-            sT=a1.getTypeOfAccesorize().name();
-            f=((a1.getFavourite())==true ? "yes" : "no");
-            pFN=a1.getPicture();
-            d=a1.getDescription();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            BufferedReader reader = new BufferedReader(new FileReader(path)); //"src\\main\\resources\\json\\app.json"));
+            String line = reader.readLine();
+            while (line!=null){
+                s= s + line;
+                line=reader.readLine();
+            }
+            reader.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+
+        return s;
     }
 
 
@@ -136,7 +160,7 @@ public class Accessorize extends Item {
     @Override
     public String toString (){
         return ("Type of accessorize: " + getTypeOfAccesorize() +
-        "\nDescription:" + getDescription() +
+        "\nDescription: " + getDescription() +
 		"\nColor: " + getColorOfItem() +
 		"\nSeason: "  + getSeasonOfItem() +
 		"\nOccasion: " + getOccasionOfItem() );

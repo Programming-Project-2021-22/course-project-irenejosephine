@@ -3,27 +3,20 @@ package app;
 import java.util.ArrayList;
 
 public class Outfit {
-    private String name, description;
+    private String  description, picture, description2;
+    private int id =0;
     private ArrayList <Item> items = new ArrayList<>();
     private Seasons seasonOfOutfit;
     private Occasions occasionOfOutfit;
-    private Colors colorOfOutfit;
 
-    //constructor with description
-    public Outfit(String name, String description, String selectedSeason, String selectedOccasion, String selectedColor) {
-        this.name = name;
+    //constructor
+    public Outfit(int id, String picture, String description, String selectedSeason, String selectedOccasion, String description2) {
+        setId(id);
+        this.picture = picture;
         this.description = description;
         setSeasonOfOutfit(selectedSeason);
         setOccasionOfOutfit(selectedOccasion);
-        setColorOfOutfit(selectedColor);
-    }
-    //constructor without description
-    public Outfit(String name, String selectedSeason, String selectedOccasion, String selectedColor) {
-        this.name = name;
-        this.description = "";
-        setSeasonOfOutfit(selectedSeason);
-        setOccasionOfOutfit(selectedOccasion);
-        setColorOfOutfit(selectedColor);
+        this.description2=description2;
     }
 
     //getter and setters
@@ -52,55 +45,6 @@ public class Outfit {
         }
     }
 
-    public Colors getColorOfOutfit() {
-        return colorOfOutfit;
-    }
-    public void setColorOfOutfit(String selectedColor) {
-    	selectedColor = selectedColor.toLowerCase();
-    	switch (selectedColor) {
-	        case "white" : {
-	        	this.colorOfOutfit = Colors.White;
-				break;
-	        }
-			case "black" : {
-				this.colorOfOutfit = Colors.Black;
-				break;
-	        }
-			case "pink" : {
-				this.colorOfOutfit = Colors.Pink;
-				break;
-			}
-			case "blue" : {
-				this.colorOfOutfit = Colors.Blue;
-				break;
-			}
-			case "red" : {
-	        	this.colorOfOutfit = Colors.Red;
-				break;
-	        }
-			case "yellow" : {
-				this.colorOfOutfit = Colors.Yellow;
-				break;
-	        }
-			case "green" : {
-				this.colorOfOutfit = Colors.Green;
-				break;
-			}
-			case "beige" : {
-				this.colorOfOutfit = Colors.Beige;
-				break;
-			}
-			case "brown" : {
-	        	this.colorOfOutfit = Colors.Brown;
-				break;
-	        }
-			case "orange" : {
-	        	this.colorOfOutfit = Colors.Orange;
-				break;
-	        }
-    	}
-    }
-
     public Occasions getOccasionOfOutfit() {
         return occasionOfOutfit;
     }
@@ -126,11 +70,18 @@ public class Outfit {
     	}
     }
 
-    public String getName (){
-        return name;
+    public int getId(){
+        return id;
     }
-    public void setName(String name){
-        this.name = name;
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public String getPicture(){
+        return picture;
+    }
+    public void setPicture(String picture){
+        this.picture = picture;
     }
 
     public String getDescription (){
@@ -140,18 +91,23 @@ public class Outfit {
         this.description = description;
     }
 
-
     //Add a new item to the outfit
     public void addItem(Item newItem){
         items.add(newItem);
     }
 
-    //Remove a item from the outfit
-    public void removeItem(int index){
-        items.remove(index);
+    public String toString (){
+        String itemsDescriptions = "";
+        for (int i=0; i<items.size(); i++){
+            itemsDescriptions+="\n" + items.get(i).getDescription();
+        }
+        return (
+            "Description: " + getDescription() +
+                "\nSeason: "  + getSeasonOfOutfit() +
+                "\nOccasion: " + getOccasionOfOutfit() +
+                "\nThe items that compone this outfit are: " + description2
+            );
     }
-
-
 }
 
 

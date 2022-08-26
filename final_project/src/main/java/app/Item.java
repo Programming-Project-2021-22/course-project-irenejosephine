@@ -8,12 +8,13 @@ package app;
  *
  * @param <T>
  */
-public abstract class Item<T> {
+public class Item<T> {
     private Seasons seasonOfItem;
     private Occasions occasionOfItem;
     private Colors colorOfItem;
     private boolean favourite;
-    private String description, picture;
+    private String description, picture, type, typeOf;
+    private int id;
 
 
     /**
@@ -26,13 +27,16 @@ public abstract class Item<T> {
      * @param filename
      * @param description
      */
-    public Item(String selectedSeason, String selectedOccasion, String selectedColor, String favourite, String filename, String description) {
+    public Item(String selectedSeason, String selectedOccasion, String selectedColor, String favourite, String filename, String description, String selectedType, int id, String typeOf) {
         setSeasonOfItem(selectedSeason);
         setOccasionOfItem(selectedOccasion);
         setColorOfItem(selectedColor);
         setPicture (filename);
         setFavourite(favourite);
         setDescription(description);
+        setType(selectedType);
+        setId(id);
+        setTypeOf(typeOf);
     }
 
     /**
@@ -201,8 +205,8 @@ public abstract class Item<T> {
      * Setter of picture
      * @param filename
      */
-    public void setPicture (String filename){// throws FileNotFoundException {
-    	this.picture = filename; //new Image (new FileInputStream(filename));
+    public void setPicture (String filename){
+    	this.picture = filename;
     }
 
     /**
@@ -221,11 +225,56 @@ public abstract class Item<T> {
     }
 
     /**
+     * Getter of id
+     * @return id
+     */
+    public int getId () {
+        return id;
+    }
+    /**
+     * Setter of id
+     * @param id
+     */
+    public void setId(int id) {
+        this.id=id;
+    }
+
+    /**
+     * Getter of type
+     * @return type
+     */
+    public String getType () {
+        return type;
+    }
+    /**
+     * Setter of type
+     * @param type
+     */
+    public void setType(String type) {
+        this.type=type;
+    }
+
+    /**
+     * Getter of typeOf
+     * @return typeOf
+     */
+    public String getTypeOf () {
+        return typeOf;
+    }
+    /**
+     * Setter of typeOf
+     * @param type
+     */
+    public void setTypeOf(String type) {
+        this.typeOf=type;
+    }
+
+    /**
      * Overwritten toString method
      */
 	@Override
 	public String toString (){
-		return ("Description:" + getDescription() +
+		return ("Description: " + getDescription() +
 		"\nColor: " + getColorOfItem() +
 		"\nSeason: "  + getSeasonOfItem() +
 		"\nOccasion: " + getOccasionOfItem() );

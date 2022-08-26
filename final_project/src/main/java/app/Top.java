@@ -2,8 +2,7 @@ package app;
 
 import com.google.gson.Gson;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -16,6 +15,16 @@ public class Top extends Item{
     private topType typeOfTop;
 
     /**
+     * Constructor form file json
+     * @param filename
+     */
+    public Top(String filename) {
+        super("winter", "formal", "red", "yes", "", "", "top", 0, "tshirt");
+        setTypeOfTop("tshirt");
+        createFromFile(filename);
+    }
+
+    /**
      * This is the constructor that gets seven String elements as parameters and assign them to the instance data of the class
      * @param selectedSeason
      * @param selectedOccasion
@@ -25,19 +34,9 @@ public class Top extends Item{
      * @param filename
      * @param description
      */
-    public Top(String selectedSeason, String selectedOccasion, String selectedColor, String selectedType, String favourite, String filename, String description) {
-        super(selectedSeason, selectedOccasion, selectedColor, favourite, filename, description);
+    public Top(String selectedSeason, String selectedOccasion, String selectedColor, String selectedType, String favourite, String filename, String description, int id) {
+        super(selectedSeason, selectedOccasion, selectedColor, favourite, filename, description, "top", id, selectedType);
         setTypeOfTop(selectedType);
-    }
-
-    /**
-     * Constructor form file json
-     * @param filename
-     */
-    public Top(String filename) {
-        super("winter", "formal", "red", "yes", "", "");
-        setTypeOfTop("tshirt");
-        createFromFile(filename);
     }
 
     /**
@@ -46,31 +45,56 @@ public class Top extends Item{
      */
     public void createFromFile(String filename) {
         String strT, sS, sO, sC, sT, f, pFN, d;
-        Scanner file;
+        int id;
         Gson gson;
         Top t1;
 
+        //read string from file
+        strT = readFile(filename);
+
+        //convert the string into an app.Accessorize object
+        gson = new Gson ();
+        t1 = gson.fromJson(strT, Top.class);
+
+        // once the obj is created from the json file its value are assigned to the current object
+        sS=t1.getSeasonOfItem().name();
+        sO=t1.getOccasionOfItem().name();
+        sC=t1.getColorOfItem().name();
+        sT=t1.getTypeOfTop().name();
+        f=((t1.getFavourite())==true ? "yes" : "no");
+        pFN=t1.getPicture();
+        d=t1.getDescription();
+        id= t1.getId();
+
+        setSeasonOfItem(sS);
+        setOccasionOfItem(sO);
+        setColorOfItem(sC);
+        setPicture (pFN);
+        setFavourite(f);
+        setDescription(d);
+        setTypeOfTop(sT);
+        setId(id);
+        setTypeOf(sT);
+    }
+    /**
+     * Support method for createFromFile, convert the context of a file into a string
+     */
+    public String readFile (String path){
+        String s="";
+
         try {
-            //read string from file
-            file = new Scanner(new File(filename));
-            strT = file.nextLine();
-            strT.replace("\"", "'");
-
-            //convert the string into an app.Accessorize object
-            gson = new Gson ();
-            t1 = gson.fromJson(strT, Top.class);
-
-            // once the obj is created from the json file its value are assigned to the current object
-            sS=t1.getSeasonOfItem().name();
-            sO=t1.getOccasionOfItem().name();
-            sC=t1.getColorOfItem().name();
-            sT=t1.getTypeOfTop().name();
-            f=((t1.getFavourite())==true ? "yes" : "no");
-            pFN=t1.getPicture();
-            d=t1.getDescription();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            BufferedReader reader = new BufferedReader(new FileReader(path)); //"src\\main\\resources\\json\\app.json"));
+            String line = reader.readLine();
+            while (line!=null){
+                s= s + line;
+                line=reader.readLine();
+            }
+            reader.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+
+        return s;
     }
 
     /**
@@ -119,7 +143,7 @@ public class Top extends Item{
     @Override
     public String toString (){
         return ("Type of top: " + getTypeOfTop() +
-        "\nDescription:" + getDescription() +
+        "\nDescription: " + getDescription() +
 		"\nColor: " + getColorOfItem() +
 		"\nSeason: "  + getSeasonOfItem() +
 		"\nOccasion: " + getOccasionOfItem() );
