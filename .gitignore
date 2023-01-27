@@ -6,7 +6,6 @@ out/
 *.ipr
 *.iws
 
-
 # Maven
 log/
 target/
