@@ -29,9 +29,10 @@ mvn package
 To do X, run:
 
 ```
-java -cp target/final-project-1.0-SNAPSHOT.jar app.Start
-
+mvn clean javafx:run
 ```
+
+Another option to run the project is to open it with Intellij IDEA and directly run the Start class. If the error "JavaFX runtime components are missing, and are required to run this application" is generated a new VM Option must be set as shown in this video (https://www.youtube.com/watch?v=hS_6ek9rTco).
 
 
 ## 4. Implementation
