@@ -23,13 +23,13 @@ Describe how to compile, package, and run your project here.
 To build the project, run:
 
 ```shell
-mvn compile package
+mvn package
 ```
 
 To do X, run:
 
 ```
-mvn java -jar target/final-project-1.0-SNAPSHOT.jar app.Start
+java -cp target/final-project-1.0-SNAPSHOT.jar app.Start
 
 ```
 
