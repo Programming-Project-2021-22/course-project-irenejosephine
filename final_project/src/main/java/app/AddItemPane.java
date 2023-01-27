@@ -524,7 +524,7 @@ public class AddItemPane extends HBox {
 
                 }
                 if (getApplication().getWardrobe(getIndex()).getItems().indexOf(i)>0){
-                    Alert information = new Alert (Alert.AlertType.INFORMATION);
+                    Alert information = new Alert (AlertType.INFORMATION);
                     information.setHeaderText(null);
                     information.setWidth(400);
                     information.setContentText("New item was added");
@@ -604,7 +604,7 @@ public class AddItemPane extends HBox {
                 }
 
                 if (getApplication().getWardrobe(getIndex()).getItems().indexOf(i)>0){
-                    Alert information = new Alert (Alert.AlertType.INFORMATION);
+                    Alert information = new Alert (AlertType.INFORMATION);
                     information.setHeaderText(null);
                     information.setWidth(400);
                     information.setContentText("New item was added");

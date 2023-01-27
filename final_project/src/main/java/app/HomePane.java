@@ -278,7 +278,7 @@ public class HomePane extends HBox {
         information.setContentText(
             "The menu bar on the top will help you navigate our app. \n" +
                 "Starting from the left the logo button will always bring you back to this homepage, " +
-                "following you'll be able to select which items' page you want to load, inside you will" +
+                "following you'll be able to select which items' page you want to load, inside you will " +
                 "find all the items of that category and you'll be able to see al their details and " +
                 "delete the items that you don't want in your wardrobe. You will also find additional" +
                 "options to sort the items such as colour, season and occasion. " +
