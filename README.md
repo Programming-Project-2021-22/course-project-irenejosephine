@@ -26,7 +26,7 @@ To build the project, run:
 mvn package
 ```
 
-To do X, run:
+To run the main class, run:
 
 ```
 mvn clean javafx:run
